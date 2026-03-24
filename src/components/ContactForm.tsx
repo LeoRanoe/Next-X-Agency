@@ -98,14 +98,14 @@ function ContactFormFn({ className = '' }: { className?: string }) {
 
   if (submitted) {
     return (
-      <div className={cn('bg-card border border-border rounded-xl p-8 text-center', className)}>
-        <div className="w-16 h-16 rounded-full bg-success-muted flex items-center justify-center mx-auto mb-4">
-          <Send size={24} className="text-success-foreground" />
+      <div className={cn('bg-white border border-slate-100 rounded-3xl p-8 text-center', className)}>
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+          <Send size={24} className="text-primary" />
         </div>
-        <h3 className="text-title text-foreground mb-2">
+        <h3 className="text-lg font-bold text-slate-900 mb-2">
           Bedankt voor uw bericht!
         </h3>
-        <p className="text-body text-muted-foreground mb-6">
+        <p className="text-sm text-slate-500 mb-6">
           Wij nemen binnen 24-48 uur contact met u op met een vrijblijvende
           quote.
         </p>
@@ -122,7 +122,7 @@ function ContactFormFn({ className = '' }: { className?: string }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className={cn('bg-card border border-border rounded-xl p-6 lg:p-8', className)}
+      className={cn('bg-white border border-slate-100 rounded-3xl p-6 lg:p-8', className)}
     >
       <div className="space-y-5">
         {/* Name */}
@@ -247,7 +247,7 @@ function ContactFormFn({ className = '' }: { className?: string }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary-hover active:bg-primary-active text-white shadow-sm hover:shadow-md rounded-xl font-semibold px-5 py-3 transition-all duration-200 active:scale-[0.97] min-h-[48px] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-primary hover:bg-orange-600 active:bg-orange-700 text-white shadow-sm hover:shadow-lg hover:shadow-orange-500/25 rounded-full font-bold text-sm px-5 py-4 transition-all duration-300 active:scale-[0.97] min-h-[48px] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             <>

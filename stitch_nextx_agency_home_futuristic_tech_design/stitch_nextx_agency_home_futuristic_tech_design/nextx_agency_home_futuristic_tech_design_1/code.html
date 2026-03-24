@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NextX Services &amp; Pricing Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#f97015",
+              secondary: "#f8fafc",
+              "background-light": "#ffffff",
+              "surface-light": "#ffffff",
+              "accent-glow": "rgba(249, 112, 21, 0.15)",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+            backgroundImage: {
+              'grid-pattern': "linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)",
+            }
+          },
+        },
+      };
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light text-slate-900 font-body;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                @apply font-display text-slate-900;
+            }
+        }
+        .text-glow-orange {
+            text-shadow: 0 0 12px rgba(249, 112, 21, 0.2);
+        }
+        .box-glow-subtle {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        .orange-border-glow {
+            border: 1px solid rgba(249, 112, 21, 0.15);
+            box-shadow: 0 0 0 1px rgba(249, 112, 21, 0.05);
+        }
+        .orange-border-glow:hover {
+            border-color: rgba(249, 112, 21, 0.4);
+            box-shadow: 0 0 20px rgba(249, 112, 21, 0.1);
+        }
+        .light-surface {
+            @apply bg-white border border-slate-100;
+        }
+        .section-gradient {
+            background: radial-gradient(circle at top right, rgba(249, 112, 21, 0.03), transparent),
+                        radial-gradient(circle at bottom left, rgba(249, 112, 21, 0.02), transparent);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 pointer-events-none z-0 opacity-100 bg-grid-pattern" style="background-size: 60px 60px;"></div>
+<nav class="fixed top-6 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl z-50">
+<div class="relative backdrop-blur-xl bg-white/80 border border-slate-200/60 rounded-full px-6 py-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+<span class="font-display font-bold text-xl tracking-wide text-slate-900">Next<span class="text-primary">X</span></span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-primary transition-colors text-slate-600" href="#">Home</a>
+<a class="text-sm font-semibold text-primary" href="#">Services</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors text-slate-600" href="#">Portfolio</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors text-slate-600" href="#">Contact</a>
+</div>
+<a class="hidden md:block bg-slate-900 hover:bg-black text-white px-6 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 shadow-md" href="#">
+                Hire Us
+            </a>
+</div>
+</nav>
+<main class="relative z-10 pt-44 pb-24">
+<header class="container mx-auto px-6 mb-24">
+<div class="max-w-4xl">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase mb-8">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    Solutions &amp; Pricing
+                </div>
+<h1 class="text-6xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
+                    Premium <span class="text-primary text-glow-orange">Digital</span> <br/>Portfolio Services.
+                </h1>
+<p class="text-slate-500 text-xl leading-relaxed max-w-2xl font-medium">
+                    Tailored tech solutions with transparent pricing. From identity to full-scale e-commerce architectures, we build the future of your brand.
+                </p>
+</div>
+</header>
+<section class="container mx-auto px-6 mb-40">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="group light-surface p-10 rounded-3xl orange-border-glow transition-all duration-500 hover:-translate-y-2 flex flex-col">
+<div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-primary transition-all duration-500 text-primary group-hover:text-white shadow-sm border border-slate-100">
+<span class="material-symbols-outlined text-3xl">auto_awesome</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Logo Design</h3>
+<p class="text-slate-500 text-sm mb-10 leading-relaxed font-medium">Professional brand identity including vector source files, typography, and color palette.</p>
+<div class="flex items-end gap-1.5 mt-auto">
+<span class="text-5xl font-bold text-slate-900">$20</span>
+<span class="text-slate-400 mb-2 text-sm font-semibold">/ start</span>
+</div>
+<button class="w-full mt-10 py-4 rounded-xl border-2 border-slate-100 text-slate-900 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">Order Identity</button>
+</div>
+<div class="group relative bg-white p-10 rounded-3xl border-2 border-primary/40 shadow-xl shadow-orange-500/5 transition-all duration-500 hover:-translate-y-2 flex flex-col overflow-hidden">
+<div class="absolute top-0 right-0 px-4 py-1 bg-primary text-white text-[10px] font-black uppercase tracking-widest">Most Popular</div>
+<div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mb-10 text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-3xl">shopping_cart</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Starter Webshop</h3>
+<p class="text-slate-500 text-sm mb-10 leading-relaxed font-medium">Full e-commerce setup with payment gateway integration, product management, and mobile-first UI.</p>
+<div class="flex items-end gap-1.5 mt-auto">
+<span class="text-5xl font-bold text-slate-900">$280</span>
+<span class="text-slate-400 mb-2 text-sm font-semibold">/ project</span>
+</div>
+<button class="w-full mt-10 py-4 rounded-xl bg-primary text-white font-bold hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/30">Launch Shop</button>
+</div>
+<div class="group light-surface p-10 rounded-3xl orange-border-glow transition-all duration-500 hover:-translate-y-2 flex flex-col">
+<div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-primary transition-all duration-500 text-primary group-hover:text-white shadow-sm border border-slate-100">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Custom SaaS</h3>
+<p class="text-slate-500 text-sm mb-10 leading-relaxed font-medium">Bespoke software architecture for complex business logic, scalability, and API-first ecosystems.</p>
+<div class="flex items-end gap-1.5 mt-auto">
+<span class="text-5xl font-bold text-slate-900">$1500</span>
+<span class="text-slate-400 mb-2 text-sm font-semibold">/ base</span>
+</div>
+<button class="w-full mt-10 py-4 rounded-xl border-2 border-slate-100 text-slate-900 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">Request Quote</button>
+</div>
+</div>
+</section>
+<section class="relative py-32 bg-slate-50/50 section-gradient border-y border-slate-100 overflow-hidden">
+<div class="container mx-auto px-6 relative z-10">
+<div class="grid lg:grid-cols-2 gap-20 items-center">
+<div class="space-y-10">
+<div class="inline-flex items-center gap-3 px-5 py-2 bg-white border border-slate-200 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+<span class="text-sm font-bold tracking-tight text-slate-900 uppercase">The UX Kukru Methodology</span>
+</div>
+<h2 class="text-5xl md:text-6xl font-bold leading-tight tracking-tight">Psychology-Driven <span class="text-primary italic">User Experience</span></h2>
+<p class="text-slate-600 text-xl leading-relaxed">
+                            Our proprietary UX Kukru approach blends neuromarketing with high-speed performance. We don't just design interfaces; we engineer digital habitats that trigger conversion.
+                        </p>
+<div class="space-y-5">
+<div class="flex items-center gap-4 text-slate-700 font-semibold">
+<span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold">check</span>
+</span>
+                                Behavioral Flow Mapping
+                            </div>
+<div class="flex items-center gap-4 text-slate-700 font-semibold">
+<span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold">check</span>
+</span>
+                                Cognitive Load Reduction
+                            </div>
+<div class="flex items-center gap-4 text-slate-700 font-semibold">
+<span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold">check</span>
+</span>
+                                Anticipatory UI Systems
+                            </div>
+</div>
+<div class="pt-6">
+<a class="inline-flex items-center gap-2 group text-primary font-bold text-lg" href="#">
+                                Learn about the Kukru Framework
+                                <span class="material-symbols-outlined transform group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-[3rem] overflow-hidden border border-white bg-white p-10 flex items-center justify-center relative shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent"></div>
+<div class="relative w-full aspect-video rounded-2xl bg-slate-900 shadow-2xl overflow-hidden flex flex-col border border-slate-800">
+<div class="bg-slate-800/50 p-3 flex gap-1.5 border-b border-white/5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+</div>
+<div class="p-8 space-y-6">
+<div class="h-5 bg-white/10 rounded-full w-2/3"></div>
+<div class="h-40 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-white/10">monitoring</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<div class="h-12 bg-white/5 rounded-xl"></div>
+<div class="h-12 bg-white/5 rounded-xl"></div>
+<div class="h-12 bg-primary rounded-xl"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 bg-primary p-8 rounded-[2rem] shadow-2xl shadow-orange-500/40 text-white transform rotate-3">
+<span class="block text-4xl font-black mb-1">+62%</span>
+<span class="text-[10px] uppercase font-black tracking-widest opacity-90">Conversion Growth</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 container mx-auto px-6">
+<div class="text-center mb-20">
+<h2 class="text-4xl font-bold mb-4 tracking-tight">Service Comparison</h2>
+<p class="text-slate-500 font-medium">Compare our premium tiers and find your perfect fit.</p>
+</div>
+<div class="overflow-x-auto rounded-3xl border border-slate-100 bg-white shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50">
+<th class="py-8 px-10 text-slate-400 font-bold text-xs uppercase tracking-widest border-b border-slate-100">Core Feature</th>
+<th class="py-8 px-10 font-display font-bold text-xl text-slate-900 border-b border-slate-100">Identity</th>
+<th class="py-8 px-10 font-display font-bold text-xl text-primary border-b border-slate-100">Webshop</th>
+<th class="py-8 px-10 font-display font-bold text-xl text-slate-900 border-b border-slate-100">Enterprise</th>
+</tr>
+</thead>
+<tbody class="text-slate-600 font-medium">
+<tr class="border-b border-slate-50 hover:bg-slate-50/30 transition-colors">
+<td class="py-8 px-10 text-slate-900 font-bold">Revisions</td>
+<td class="py-8 px-10">3 Rounds</td>
+<td class="py-8 px-10">Unlimited</td>
+<td class="py-8 px-10">Partner-level</td>
+</tr>
+<tr class="border-b border-slate-50 hover:bg-slate-50/30 transition-colors">
+<td class="py-8 px-10 text-slate-900 font-bold">Launch Support</td>
+<td class="py-8 px-10">—</td>
+<td class="py-8 px-10">30 Days</td>
+<td class="py-8 px-10">Ongoing 24/7</td>
+</tr>
+<tr class="border-b border-slate-50 hover:bg-slate-50/30 transition-colors">
+<td class="py-8 px-10 text-slate-900 font-bold">Custom Icons</td>
+<td class="py-8 px-10">Included</td>
+<td class="py-8 px-10">Included</td>
+<td class="py-8 px-10">Hand-crafted</td>
+</tr>
+<tr class="border-b border-slate-50 hover:bg-slate-50/30 transition-colors">
+<td class="py-8 px-10 text-slate-900 font-bold">Performance</td>
+<td class="py-8 px-10">—</td>
+<td class="py-8 px-10 text-primary font-bold">98+ Lighthouse</td>
+<td class="py-8 px-10">Extreme Edge</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<footer class="bg-slate-950 text-white pt-24 pb-12">
+<div class="container mx-auto px-6">
+<div class="grid md:grid-cols-4 gap-16 mb-20">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">terminal</span>
+<span class="font-display font-bold text-3xl tracking-wide">Next<span class="text-primary">X</span></span>
+</div>
+<p class="text-slate-400 max-w-sm mb-10 text-lg font-medium leading-relaxed">
+                        Engineering future-proof digital assets for ambitious brands worldwide.
+                    </p>
+<div class="flex gap-4">
+<a class="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold font-display text-xl mb-8 tracking-tight">Explore</h4>
+<ul class="space-y-4 text-slate-400 font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Case Studies</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Kukru UX</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Agency Hub</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold font-display text-xl mb-8 tracking-tight">Legal</h4>
+<ul class="space-y-4 text-slate-400 font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 font-semibold uppercase tracking-widest">
+<p>© 2024 NextX Agency. Digital Dominance by Design.</p>
+<div class="flex gap-8">
+<span>London</span>
+<span>New York</span>
+<span>Amsterdam</span>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

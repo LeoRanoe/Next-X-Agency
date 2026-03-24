@@ -1,20 +1,12 @@
-'use client'
+﻿'use client'
 
-import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
   fadeInUp,
   staggerContainerSlow,
   scaleIn,
   blurFadeIn,
-  springPopIn,
 } from '@/lib/animationUtils'
-import { SpotlightCard } from '@/components/animated/SpotlightCard'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const steps = [
   {
@@ -22,219 +14,162 @@ const steps = [
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
     title: 'Intake & Briefing',
     description: 'U stuurt uw materialen en wensen. Wij bevestigen schriftelijk met een duidelijke timeline.',
-    staggerClass: '',
+    items: ['Requirements Gathering', 'Brand Voice Definition', 'Project Roadmap Setup'],
   },
   {
     number: 2,
     icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
     title: 'Design & Development',
     description: 'Wij bouwen en personaliseren uw project. Tussentijdse updates bij grotere projecten.',
-    staggerClass: 'lg:mt-12',
+    items: ['Frontend Architecture', 'System Integration', 'Performance Tuning'],
   },
   {
     number: 3,
     icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
     title: 'Review & Revisies',
     description: 'U beoordeelt de eerste versie en geeft feedback. Wij verwerken gratis minor revisions.',
-    staggerClass: '',
+    items: ['Cross-browser QA', 'User Acceptance Testing', 'Security Auditing'],
   },
   {
     number: 4,
     icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
     title: 'Oplevering',
-    description: 'Website live of designs geëxporteerd. U ontvangt alle credentials en instructies.',
-    staggerClass: 'lg:mt-12',
+    description: 'Website live of designs geexporteerd. U ontvangt alle credentials en instructies.',
+    items: ['Domain Deployment', 'SEO Configuration', 'CMS Handover'],
   },
   {
     number: 5,
     icon: 'M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9',
     title: 'Post-Launch Support',
     description: '30 dagen gratis minor revisions. Daarna: pay-per-fix of UX Kukru maandpakket.',
-    staggerClass: '',
+    items: ['Bi-weekly Analytics', '24/7 Monitoring', 'Agile Feature Updates'],
   },
 ] as const
 
 function ProcessSectionFn() {
-  const neonPathRef = useRef<SVGPathElement>(null)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  // GSAP: scroll-linked neon connector draw
-  useGSAP(() => {
-    if (!neonPathRef.current) return
-    const path = neonPathRef.current
-    const length = path.getTotalLength()
-    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })
-    gsap.to(path, {
-      strokeDashoffset: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 70%',
-        end: 'center 40%',
-        scrub: 1.5,
-      },
-    })
-  }, { scope: sectionRef })
-
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden bg-[#fdfdfd] dark:bg-[#0B1120]">
-      {/* Grid paper background */}
-      <div className="absolute inset-0 bg-grid-paper opacity-60 pointer-events-none" />
-
-      {/* Scribble corners */}
-      <svg className="absolute top-0 left-0 w-36 h-36 text-gray-400 opacity-15 pointer-events-none" viewBox="0 0 200 200" aria-hidden="true">
-        <path d="M20,20 Q50,10 80,40 T150,50" fill="none" stroke="currentColor" strokeDasharray="5,5" strokeWidth="2" />
-        <circle cx="40" cy="60" fill="none" r="10" stroke="currentColor" strokeWidth="1" />
-        <path d="M10,80 L60,120" fill="none" stroke="currentColor" strokeWidth="1" />
-        <path d="M15,85 L65,125" fill="none" stroke="currentColor" strokeWidth="1" />
-      </svg>
-      <svg className="absolute bottom-0 right-0 w-36 h-36 text-primary opacity-15 transform rotate-180 pointer-events-none" viewBox="0 0 200 200" aria-hidden="true">
-        <path d="M100,100 C150,150 50,150 100,200" fill="none" stroke="currentColor" strokeWidth="3" />
-        <rect fill="none" height="40" stroke="currentColor" strokeWidth="1" width="40" x="120" y="120" />
-      </svg>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="py-24 lg:py-32 relative overflow-hidden bg-slate-50/50">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.4 }}
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.18 } } }}
-          className="text-center mb-24 relative"
+          className="text-center mb-20"
         >
-          <motion.span variants={scaleIn} className="font-mono text-primary text-lg font-bold tracking-widest uppercase relative inline-block -rotate-2">
-            Workflow v2.0
-            <svg className="absolute w-full h-full -bottom-1 left-0 text-primary opacity-30" preserveAspectRatio="none" viewBox="0 0 100 20" aria-hidden="true">
-              <motion.path
-                d="M0 15 Q 50 20 100 15"
-                fill="none" stroke="currentColor" strokeWidth="2"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.4, delay: 0.3, ease: 'easeInOut' }}
-              />
-            </svg>
-          </motion.span>
-          <motion.h2 variants={blurFadeIn} className="mt-4 text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-            Living{' '}
-            <span className="gradient-text-animated relative inline-block">
-              Blueprint
-              <svg className="absolute w-[110%] h-[120%] -top-[10%] -left-[5%] text-primary opacity-40 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 200 60" aria-hidden="true">
-                <motion.ellipse
-                  cx="100" cy="30" rx="95" ry="25"
-                  fill="none" stroke="currentColor" strokeDasharray="10 5" strokeWidth="2"
-                  transform="rotate(-2 100 30)"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 2, delay: 0.6, ease: 'easeInOut' }}
-                />
-              </svg>
-            </span>
+          <motion.div variants={scaleIn} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            Strategic Workflow
+          </motion.div>
+          <motion.h2 variants={blurFadeIn} className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+            Project{' '}
+            <span className="text-primary">Roadmap</span>
           </motion.h2>
-          <motion.p variants={fadeInUp} className="mt-6 text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.p variants={fadeInUp} className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
             Helder vijf-fasen proces — zodat u precies weet wat u kunt verwachten.
           </motion.p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="relative mt-20">
-          {/* GSAP scroll-linked neon connector line (desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full transform -translate-y-1/2 z-0 h-40">
-            <svg className="w-full h-full overflow-visible pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1200 150" aria-hidden="true">
-              <defs>
-                <linearGradient id="neonGradient" x1="0%" x2="100%" y1="0%" y2="0%">
-                  <stop offset="0%" stopColor="#f97015" stopOpacity="0" />
-                  <stop offset="10%" stopColor="#f97015" />
-                  <stop offset="90%" stopColor="#f97015" />
-                  <stop offset="100%" stopColor="#f97015" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              {/* Static dashed base line */}
-              <path
-                d="M50,75 C200,150 300,0 450,75 S 700,150 850,75 S 1100,0 1150,75"
-                fill="none"
-                stroke="#cbd5e1"
-                strokeDasharray="4 4"
-                strokeWidth="1"
-                className="dark:stroke-slate-700"
-              />
-              {/* GSAP-controlled neon overlay */}
-              <path
-                ref={neonPathRef}
-                d="M50,75 C200,150 300,0 450,75 S 700,150 850,75 S 1100,0 1150,75"
-                fill="none"
-                stroke="url(#neonGradient)"
-                strokeLinecap="round"
-                strokeWidth="3"
-                style={{ filter: 'drop-shadow(0 0 12px rgba(249,112,21,0.9)) drop-shadow(0 0 24px rgba(249,112,21,0.6)) drop-shadow(0 0 40px rgba(249,112,21,0.3))' }}
-              />
-            </svg>
-          </div>
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-primary/20 to-transparent -translate-x-1/2 hidden md:block" />
 
-          {/* Step cards — staggered entrance */}
           <motion.div
             variants={staggerContainerSlow}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"
+            className="space-y-16 md:space-y-24"
           >
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                variants={fadeInUp}
-                className={`relative group ${step.staggerClass}`}
-              >
-                <SpotlightCard className="bg-white dark:bg-[#0F172A] rounded-2xl p-2 relative z-10 hover-lift">
-                  <div className="sketched-border p-6 h-full flex flex-col items-center text-center">
-                    {/* Icon with number badge */}
+            {steps.map((step, index) => {
+              const isLeft = index % 2 === 0
+              return (
+                <motion.div
+                  key={step.number}
+                  variants={fadeInUp}
+                  className="relative md:flex items-center justify-between w-full group"
+                >
+                  {/* Left side content */}
+                  <div className={`md:w-[42%] ${isLeft ? 'md:text-right' : ''}`}>
+                    {isLeft ? (
+                      <>
+                        <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                          Fase {String(step.number).padStart(2, '0')}
+                        </span>
+                        <h3 className="text-2xl font-bold mt-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                          {step.title}
+                        </h3>
+                        <p className="text-slate-500 mt-3 leading-relaxed text-sm">
+                          {step.description}
+                        </p>
+                      </>
+                    ) : (
+                      <ul className="space-y-3 mt-4 md:mt-0">
+                        {step.items.map((item) => (
+                          <li key={item} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
+                            <svg className="w-5 h-5 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Center node */}
+                  <div className="relative z-10 flex items-center justify-center md:order-2 my-4 md:my-0">
                     <motion.div
-                      className="w-16 h-16 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4 border-2 border-dashed border-primary relative icon-glow"
-                      initial={{ scale: 0, rotate: -20 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.34, 1.56, 0.64, 1] }}
-                      whileHover={{ scale: 1.18, rotate: 8 }}
+                      className="w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:border-primary/30"
+                      whileHover={{ scale: 1.1 }}
                     >
                       <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d={step.icon} />
                       </svg>
-                      <motion.span
-                        className="absolute -right-2 -top-2 w-7 h-7 bg-primary text-white flex items-center justify-center text-xs font-black font-mono badge-float"
-                        style={{ borderRadius: '50%', boxShadow: '0 0 12px rgba(249,112,21,0.7)' }}
-                        variants={springPopIn}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        custom={index}
-                        transition={{ delay: index * 0.15 + 0.45 }}
-                      >
-                        {step.number}
-                      </motion.span>
                     </motion.div>
-                    <h3 className="text-base font-bold text-gray-900 dark:text-white font-mono mb-2 group-hover:text-primary transition-colors duration-300">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed font-mono">
-                      {step.description}
-                    </p>
                   </div>
-                </SpotlightCard>
 
-                {/* Mobile connector */}
-                {index < steps.length - 1 && (
-                  <motion.div
-                    className="lg:hidden w-px h-8 bg-primary/30 mx-auto mt-4"
-                    initial={{ scaleY: 0, originY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    style={{ boxShadow: '0 0 6px rgba(249,112,21,0.5)' }}
-                  />
-                )}
-              </motion.div>
-            ))}
+                  {/* Right side content */}
+                  <div className={`md:w-[42%] ${!isLeft ? 'md:text-right' : ''}`}>
+                    {isLeft ? (
+                      <ul className="space-y-3 mt-4 md:mt-0">
+                        {step.items.map((item) => (
+                          <li key={item} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
+                            <svg className="w-5 h-5 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <>
+                        <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                          Fase {String(step.number).padStart(2, '0')}
+                        </span>
+                        <h3 className="text-2xl font-bold mt-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                          {step.title}
+                        </h3>
+                        <p className="text-slate-500 mt-3 leading-relaxed text-sm">
+                          {step.description}
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Mobile-only phase label */}
+                  <div className="md:hidden -order-1 mb-2">
+                    <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                      Fase {String(step.number).padStart(2, '0')}
+                    </span>
+                    <h3 className="text-xl font-bold text-slate-900">{step.title}</h3>
+                    <p className="text-slate-500 mt-1 text-sm">{step.description}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>

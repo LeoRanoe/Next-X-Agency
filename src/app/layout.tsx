@@ -1,6 +1,20 @@
 import type { Metadata } from 'next'
+import { Space_Grotesk, Inter } from 'next/font/google'
 import './globals.css'
-import { CursorTracker } from '@/components/animated/CursorTracker'
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  weight: ['300', '400', '500', '600'],
+})
 
 export const metadata: Metadata = {
   title: 'NextX Agency — Complete Digital Solutions for Modern Businesses',
@@ -29,17 +43,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="nl" className="scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Architects+Daughter&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="nl" className={`scroll-smooth ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="bg-background text-foreground antialiased">
-        <CursorTracker />
         {children}
       </body>
     </html>
