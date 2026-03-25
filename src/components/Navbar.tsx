@@ -29,13 +29,9 @@ function NavbarFn() {
             alt="NextX Agency"
             width={120}
             height={48}
-            className="h-8 w-auto object-contain hidden md:block"
+            className="h-8 w-auto object-contain"
             priority
           />
-          {/* Text logo on mobile */}
-          <span className="md:hidden font-bold text-xl tracking-wide text-slate-900" style={{ fontFamily: 'var(--font-heading)' }}>
-            Next<span className="text-primary">X</span>
-          </span>
         </Link>
 
         {/* Desktop Nav Links */}

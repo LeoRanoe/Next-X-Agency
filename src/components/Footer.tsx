@@ -27,7 +27,7 @@ function FooterFn() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center mb-4">
               <Image
-                src="/logo-dark.png"
+                src="/logo-light.png"
                 alt="NextX Agency"
                 width={140}
                 height={56}

@@ -1,6 +1,5 @@
 ﻿'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   fadeInUp,
@@ -77,59 +76,35 @@ function WhySectionFn() {
           </motion.p>
         </motion.div>
 
-        {/* Asymmetric layout: image left, features right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
-            <div className="rounded-3xl overflow-hidden shadow-lg border border-slate-100">
-              <Image
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&h=500&fit=crop&q=80"
-                alt="Team samenwerking — professionals aan het werk"
-                width={700}
-                height={500}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-            {/* Accent bar */}
-            <div className="absolute -bottom-3 left-8 right-8 h-6 bg-primary/10 rounded-full blur-xl" />
-          </motion.div>
-
-          {/* Right — Features list */}
-          <motion.div
-            variants={staggerContainerSlow}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="space-y-6"
-          >
-            {features.map((feature) => (
-              <motion.div
-                key={feature.title}
-                variants={fadeInUp}
-                className="group flex gap-5 p-5 rounded-2xl bg-white border border-slate-100 transition-all duration-400 hover:border-primary/25 hover:shadow-md"
-              >
-                {/* Icon */}
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-400">
-                  {feature.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                    {feature.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        {/* 2×2 features grid — full width */}
+        <motion.div
+          variants={staggerContainerSlow}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        >
+          {features.map((feature) => (
+            <motion.div
+              key={feature.title}
+              variants={fadeInUp}
+              className="group flex gap-5 p-6 rounded-2xl bg-white border border-slate-100 transition-all duration-300 hover:border-primary/25 hover:shadow-md"
+            >
+              {/* Icon */}
+              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                {feature.icon}
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 mb-1.5 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                  {feature.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )
