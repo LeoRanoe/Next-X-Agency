@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     'e-commerce Suriname',
     'grafisch ontwerp',
   ],
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     title: 'NextX Agency — Complete Digital Solutions',
     description:
