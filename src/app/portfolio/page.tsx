@@ -119,7 +119,7 @@ export default function PortfolioPage() {
                   />
                   
                   {/* Browser mockup */}
-                  <div className="relative bg-slate-900 overflow-hidden" style={{ height: '420px' }}>
+                  <div className="relative bg-slate-900 overflow-hidden" style={{ height: '280px' }}>
                     {/* Chrome bar */}
                     <div className="flex items-center gap-1.5 px-3 py-2.5 bg-slate-800 border-b border-slate-700/50">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
