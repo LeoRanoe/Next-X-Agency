@@ -330,6 +330,23 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* Horizontal marquee ticker */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* Text glow orange (subtle for light bg) */
 .text-glow-orange {
   text-shadow: 0 0 20px rgba(249, 112, 21, 0.15);
@@ -446,4 +463,82 @@ body {
   .text-headline {
     font-size: 3.5rem;
   }
+}
+
+/* ===== ENHANCED DESIGN UTILITIES ===== */
+
+/* Project badge overlay */
+.project-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
+  background: #f97015;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(249, 112, 21, 0.3);
+}
+
+/* Stat chip */
+.stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.stat-chip .stat-number {
+  color: #f97015;
+  font-weight: 700;
+}
+
+/* Image overlay gradient (for portfolio cards) */
+.image-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.image-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(15, 23, 42, 0.6) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Section divider line */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #f97015, #ff8c42);
+  border-radius: 3px;
+}
+
+/* Early adopter card darkened section */
+.dark-section {
+  background: #0f172a;
+  color: #ffffff;
+}
+.dark-section .text-muted {
+  color: #94a3b8;
 }

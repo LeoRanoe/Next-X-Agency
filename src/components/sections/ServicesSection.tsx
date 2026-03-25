@@ -7,8 +7,6 @@ import {
   fadeInUp,
   slideInLeft,
   staggerContainerFast,
-  staggerContainerSlow,
-  cardFlipIn,
   blurFadeIn,
 } from '@/lib/animationUtils'
 
@@ -91,6 +89,7 @@ const categories = [
     tag: 'Web & Platform',
     title: 'Build',
     subtitle: 'Van snelle landingspagina tot volledig e-commerce platform.',
+    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=250&fit=crop&q=80',
     services: [
       { name: 'Business Card Site', description: 'Krachtige one-page digitale identiteit. Professioneel en direct inzetbaar.', price: '$100', href: '/services#websites', recommended: false, Icon: IconBusinessCard },
       { name: 'Service Website', description: 'Responsive multi-page platform met geavanceerde functionaliteiten.', price: '$120', href: '/services#websites', recommended: true, features: ["5 geoptimaliseerde pagina's", 'Lead Forms integratie', 'Basis SEO setup'], Icon: IconServiceWebsite },
@@ -102,6 +101,7 @@ const categories = [
     tag: 'Visueel & UX',
     title: 'Design',
     subtitle: 'Merkidentiteit, interface en gebruikerservaring die converteert.',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop&q=80',
     services: [
       { name: 'Logo & Branding', description: 'Vector-gebaseerd conceptontwerp. Scherpe merkidentiteit voor elk formaat.', price: '$20', href: '/services#graphic-design', recommended: false, Icon: IconLogoBranding },
       { name: 'UX/UI Design', description: 'UX audits, UI redesigns en gebruiksvriendelijke Figma mockups.', price: '$50', href: '/services#ux-ui', recommended: false, Icon: IconUxUi },
@@ -113,6 +113,7 @@ const categories = [
     tag: 'Zichtbaarheid',
     title: 'Marketing',
     subtitle: 'Vergroot je online bereik met SEO en zoekwoordstrategie.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&q=80',
     services: [
       { name: 'SEO & Zichtbaarheid', description: 'Basis SEO setup, Google Search Console, sitemap en keyword monitoring.', price: '$30', href: '/services#seo', recommended: false, features: ['Google Search Console', 'XML Sitemap setup', 'Keyword monitoring'], Icon: IconSeo },
     ],
@@ -121,90 +122,108 @@ const categories = [
 
 type ServiceItem = (typeof categories)[number]['services'][number]
 
-function ServiceCard({ service }: { service: ServiceItem }) {
-  const { name, description, price, href, recommended, Icon } = service
-  const features = 'features' in service ? (service as { features: readonly string[] }).features : []
+function ServiceRow({ service, index }: { service: ServiceItem; index: number }) {
+  const { name, description, price, href, recommended } = service
   return (
-    <motion.div variants={cardFlipIn} className="h-full">
-      <Link
-        href={href}
-        className="group flex flex-col h-full bg-white border border-slate-100 rounded-3xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-primary/30 relative overflow-hidden"
-      >
-        {recommended && (
-          <span className="absolute top-0 right-0 px-4 py-1 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-bl-2xl">
-            Aanbevolen
+    <Link
+      href={href}
+      className="group flex items-center gap-4 py-5 px-4 -mx-4 rounded-xl transition-all duration-300 hover:bg-primary/[0.035] border-b border-slate-100 last:border-0"
+    >
+      {/* Row index */}
+      <span className="text-[11px] font-black tabular-nums text-slate-300 tracking-wider w-6 shrink-0 group-hover:text-primary transition-colors duration-300">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+
+      {/* Name + description */}
+      <div className="flex-1 min-w-0">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <span
+            className="text-[15px] font-bold text-slate-900 tracking-tight group-hover:text-primary transition-colors duration-300"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
+            {name}
           </span>
-        )}
-
-        {/* Icon */}
-        <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 border border-slate-100 text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-500">
-          <div className="w-9 h-9"><Icon /></div>
+          {recommended && (
+            <span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-primary text-white rounded-full">
+              Aanbevolen
+            </span>
+          )}
         </div>
-
-        <h3 className="text-xl font-bold text-slate-900 mb-2 tracking-tight group-hover:text-primary transition-colors" style={{ fontFamily: 'var(--font-heading)' }}>
-          {name}
-        </h3>
-        <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-grow">
+        <p className="text-sm text-slate-400 leading-snug mt-0.5 truncate max-w-xs">
           {description}
         </p>
+      </div>
 
-        {features.length > 0 && (
-          <ul className="mb-4 space-y-1.5 text-sm">
-            {features.map((f: string) => (
-              <li key={f} className="flex items-center text-slate-600">
-                <span className="text-primary mr-2 font-bold">›</span>{f}
-              </li>
-            ))}
-          </ul>
-        )}
+      {/* Dotted connector line — hidden on mobile */}
+      <div className="hidden md:block flex-1 border-b border-dashed border-slate-200 mx-4 group-hover:border-primary/30 transition-colors duration-300" />
 
-        <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
-          <div className="flex items-end gap-1">
-            <span className="text-3xl font-bold text-slate-900" style={{ fontFamily: 'var(--font-heading)' }}>
-              {price.replace('', '')}
-            </span>
-            <span className="text-slate-400 mb-1 text-sm font-medium">/ start</span>
-          </div>
-          <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
+      {/* Price */}
+      <span
+        className="text-[15px] font-bold text-slate-700 shrink-0 group-hover:text-primary transition-colors duration-300"
+        style={{ fontFamily: 'var(--font-heading)' }}
+      >
+        {price}
+        <span className="text-slate-400 text-xs font-medium ml-0.5">/ start</span>
+      </span>
+
+      {/* Arrow */}
+      <div className="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-primary group-hover:border-primary group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300">
+        <svg
+          className="w-3.5 h-3.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </Link>
   )
 }
 
-function CategoryBlock({ cat }: { cat: (typeof categories)[number] }) {
-  const isWideCard = cat.services.length === 1
+function CategoryBlock({
+  cat,
+  catIndex,
+}: {
+  cat: (typeof categories)[number]
+  catIndex: number
+}) {
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={staggerContainerSlow}
-      className="mb-20 last:mb-0"
+      viewport={{ once: true, amount: 0.08 }}
+      variants={staggerContainerFast}
+      className="mb-14 last:mb-0"
     >
-      <motion.div variants={fadeInUp} className="mb-8">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="text-xs font-bold text-primary tracking-widest uppercase px-3 py-1 bg-primary/5 border border-primary/15 rounded-full">
-            {cat.tag}
+      {/* Category editorial header */}
+      <motion.div variants={fadeInUp} className="mb-2">
+        <div className="flex items-baseline flex-wrap gap-x-4 gap-y-1 mb-4">
+          <span className="text-[11px] font-black tracking-[0.28em] uppercase text-primary/70">
+            {String(catIndex + 1).padStart(2, '0')}
           </span>
-        </div>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-2">
-          <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+          <h3
+            className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
             {cat.title}
           </h3>
-          <p className="text-slate-500 text-sm max-w-sm md:text-right leading-relaxed">
-            {cat.subtitle}
-          </p>
+          <span className="text-xs font-bold tracking-[0.16em] uppercase text-slate-400">
+            — {cat.tag}
+          </span>
         </div>
+        <div className="w-full h-px bg-slate-200" />
+        <p className="text-sm text-slate-400 mt-3 leading-relaxed">{cat.subtitle}</p>
       </motion.div>
 
-      <div className={isWideCard ? 'max-w-sm' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'}>
-        {cat.services.map((svc) => (
-          <ServiceCard key={svc.name} service={svc} />
+      {/* Service rows */}
+      <div>
+        {cat.services.map((svc, i) => (
+          <motion.div key={svc.name} variants={fadeInUp}>
+            <ServiceRow service={svc} index={i} />
+          </motion.div>
         ))}
       </div>
     </motion.div>
@@ -215,7 +234,7 @@ function ServicesSectionFn() {
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden" id="services">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Section header */}
+        {/* Section header — editorial style */}
         <motion.div
           variants={staggerContainerFast}
           initial="hidden"
@@ -224,11 +243,16 @@ function ServicesSectionFn() {
           className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6"
         >
           <motion.div variants={slideInLeft} className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Diensten
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-px w-7 bg-primary opacity-50" />
+              <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-slate-400">
+                Diensten
+              </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
               Schaalbare{' '}
               <span className="text-primary">Oplossingen</span>
             </h2>
@@ -242,7 +266,14 @@ function ServicesSectionFn() {
               className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-orange-600 transition-colors group"
             >
               Bekijk portfolio
-              <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+              <svg
+                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                aria-hidden="true"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
@@ -250,8 +281,8 @@ function ServicesSectionFn() {
         </motion.div>
 
         {/* Categories */}
-        {categories.map((cat) => (
-          <CategoryBlock key={cat.id} cat={cat} />
+        {categories.map((cat, i) => (
+          <CategoryBlock key={cat.id} cat={cat} catIndex={i} />
         ))}
       </div>
     </section>

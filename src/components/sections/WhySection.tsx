@@ -1,11 +1,11 @@
 ﻿'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   fadeInUp,
   staggerContainer,
   staggerContainerSlow,
-  cardFlipIn,
   blurFadeIn,
   scaleIn,
 } from '@/lib/animationUtils'
@@ -15,7 +15,7 @@ const features = [
     title: 'Snel Geleverd',
     description: 'Geoptimaliseerde workflows zorgen voor snelle oplevering zonder kwaliteitsverlies.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
       </svg>
     ),
@@ -24,21 +24,19 @@ const features = [
     title: 'Smart Budget',
     description: 'Slimme technologie-integratie zorgt voor premium output tegen competitieve tarieven.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-        <rect height="16" rx="2" width="20" x="2" y="4" />
-        <line x1="12" x2="12" y1="2" y2="4" />
-        <line x1="12" x2="12" y1="20" y2="22" />
-        <path d="M8 12h.01M16 12h.01" strokeWidth="3" />
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8" />
+        <path d="M12 6v2m0 8v2" />
       </svg>
     ),
   },
   {
     title: 'Custom Design',
-    description: 'Data-gedreven esthetiek met 100% brand identity match voor uw doelgroep.',
+    description: 'Elk project wordt volledig gepersonaliseerd naar uw merkidentiteit en doelgroep.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94" />
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
     ),
   },
@@ -46,10 +44,9 @@ const features = [
     title: 'Lokaal Netwerk',
     description: 'Geworteld in Paramaribo met een globaal perspectief en sterke lokale connecties.',
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
         <circle cx="12" cy="10" r="3" />
-        <path d="M12 13a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z" />
-        <path d="M5 5a10 10 0 0 1 14 0" />
       </svg>
     ),
   },
@@ -80,35 +77,59 @@ function WhySectionFn() {
           </motion.p>
         </motion.div>
 
-        {/* Cards grid */}
-        <motion.div
-          variants={staggerContainerSlow}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {features.map((feature) => (
-            <motion.div
-              key={feature.title}
-              variants={cardFlipIn}
-              className="group"
-            >
-              <div className="bg-white border border-slate-100 rounded-3xl p-8 h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-primary/20">
+        {/* Asymmetric layout: image left, features right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left — Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
+          >
+            <div className="rounded-3xl overflow-hidden shadow-lg border border-slate-100">
+              <Image
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&h=500&fit=crop&q=80"
+                alt="Team samenwerking — professionals aan het werk"
+                width={700}
+                height={500}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            {/* Accent bar */}
+            <div className="absolute -bottom-3 left-8 right-8 h-6 bg-primary/10 rounded-full blur-xl" />
+          </motion.div>
+
+          {/* Right — Features list */}
+          <motion.div
+            variants={staggerContainerSlow}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-6"
+          >
+            {features.map((feature) => (
+              <motion.div
+                key={feature.title}
+                variants={fadeInUp}
+                className="group flex gap-5 p-5 rounded-2xl bg-white border border-slate-100 transition-all duration-400 hover:border-primary/25 hover:shadow-md"
+              >
                 {/* Icon */}
-                <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-400">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {feature.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -8,6 +8,14 @@ import {
   blurFadeIn,
 } from '@/lib/animationUtils'
 
+const phaseColors = [
+  'border-primary',
+  'border-sky-500',
+  'border-violet-500',
+  'border-emerald-500',
+  'border-amber-500',
+] as const
+
 const steps = [
   {
     number: 1,
@@ -122,7 +130,7 @@ function ProcessSectionFn() {
                   {/* Center node */}
                   <div className="relative z-10 flex items-center justify-center md:order-2 my-4 md:my-0">
                     <motion.div
-                      className="w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:border-primary/30"
+                      className={`w-16 h-16 rounded-2xl bg-white border-2 ${phaseColors[index]} shadow-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg`}
                       whileHover={{ scale: 1.1 }}
                     >
                       <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">

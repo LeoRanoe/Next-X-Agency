@@ -1,6 +1,7 @@
 ﻿'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { CTABanner } from '@/components/sections/CTABanner'
@@ -13,51 +14,48 @@ import {
   cardFlipIn,
 } from '@/lib/animationUtils'
 
-const projectVisuals = [
-  { bg: 'bg-gradient-to-br from-primary/10 to-orange-50', accent: 'text-primary' },
-  { bg: 'bg-gradient-to-br from-sky-500/10 to-sky-50', accent: 'text-sky-500' },
-  { bg: 'bg-gradient-to-br from-violet-500/10 to-violet-50', accent: 'text-violet-500' },
-  { bg: 'bg-gradient-to-br from-emerald-500/10 to-emerald-50', accent: 'text-emerald-500' },
-  { bg: 'bg-gradient-to-br from-amber-500/10 to-amber-50', accent: 'text-amber-500' },
-  { bg: 'bg-gradient-to-br from-pink-500/10 to-pink-50', accent: 'text-pink-500' },
-] as const
-
 const projects = [
   {
     title: 'Tjin Catering',
     category: 'Restaurant Website',
     description: 'Complete restaurant website met digitaal menu, openingstijden en reserveringslink.',
     tags: ['Web Design', 'Restaurant'],
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop&q=80',
   },
   {
     title: 'RP Trading',
     category: 'E-Commerce',
     description: 'Webshop met productcatalogus, winkelwagen en Stripe betalingsintegratie.',
     tags: ['E-Commerce', 'Webshop'],
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&q=80',
   },
   {
     title: 'Suri Style Boutique',
     category: 'E-Commerce',
     description: 'Mode webshop met klantaccounts, wishlist en order tracking systeem.',
     tags: ['E-Commerce', 'Fashion'],
+    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop&q=80',
   },
   {
     title: 'Green Garden Landscaping',
     category: 'Service Website',
     description: 'Multi-page service website met portfolio galerij en contactformulier.',
     tags: ['Web Design', 'Services'],
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop&q=80',
   },
   {
     title: 'Studio Kroon',
     category: 'Portfolio Website',
     description: "Fotografen portfolio met galerij, project detail pagina's en over mij sectie.",
     tags: ['Portfolio', 'Fotografie'],
+    image: 'https://images.unsplash.com/photo-1452802447250-470a88ac82bc?w=600&h=400&fit=crop&q=80',
   },
   {
     title: 'FreshBite Delivery',
     category: 'Brand Identity',
     description: 'Complete visuele identiteit \u2014 logo, social media templates en flyer designs.',
     tags: ['Graphic Design', 'Branding'],
+    image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=400&fit=crop&q=80',
   },
 ] as const
 
@@ -89,8 +87,27 @@ export default function PortfolioPage() {
           </motion.div>
         </section>
 
+        {/* Disclaimer banner */}
+        <section className="pb-8">
+          <div className="max-w-6xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-primary/5 border border-primary/15 text-sm"
+            >
+              <svg className="w-5 h-5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-slate-600">
+                <strong className="text-slate-900">Opmerking:</strong> Dit zijn illustratieve voorbeeldprojecten die laten zien wat wij kunnen bouwen. Wij zijn net gestart en bouwen ons portfolio op met echte klanten.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Projects grid */}
-        <section className="py-24 lg:py-32 relative">
+        <section className="py-16 lg:py-24 relative">
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <motion.div
               variants={staggerContainerFast}
@@ -99,45 +116,51 @@ export default function PortfolioPage() {
               viewport={{ once: true, amount: 0.05 }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {projects.map((project, index) => {
-                const vis = projectVisuals[index % projectVisuals.length]
-                return (
-                  <motion.div
-                    key={project.title}
-                    variants={cardFlipIn}
-                    className="group"
-                  >
-                    <div className="bg-white border border-slate-100 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-primary/20">
-                      {/* Preview area */}
-                      <div className={`aspect-[16/9] ${vis.bg} relative flex items-center justify-center`}>
-                        <span className={`text-3xl font-bold ${vis.accent} opacity-20`} style={{ fontFamily: 'var(--font-heading)' }}>
-                          {project.title.charAt(0)}
-                        </span>
-                        <div className="absolute bottom-3 left-3 px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-white/80 backdrop-blur-sm text-slate-600 border border-slate-200/60">
-                          {project.category}
-                        </div>
-                      </div>
-
-                      <div className="p-6">
-                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-slate-500 mb-4 leading-relaxed">{project.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-xs text-slate-500"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
+              {projects.map((project) => (
+                <motion.div
+                  key={project.title}
+                  variants={cardFlipIn}
+                  className="group"
+                >
+                  <div className="bg-white border border-slate-100 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-primary/20">
+                    {/* Preview area with real image */}
+                    <div className="aspect-[16/10] relative overflow-hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        width={600}
+                        height={400}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
+                      {/* Voorbeeldproject badge */}
+                      <span className="project-badge">Voorbeeldproject</span>
+                      {/* Category */}
+                      <div className="absolute bottom-3 left-3 px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-white/90 backdrop-blur-sm text-slate-700 border border-slate-200/60">
+                        {project.category}
                       </div>
                     </div>
-                  </motion.div>
-                )
-              })}
+
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-slate-500 mb-4 leading-relaxed">{project.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-xs text-slate-500"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </section>

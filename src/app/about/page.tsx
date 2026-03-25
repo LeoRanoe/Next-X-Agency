@@ -1,6 +1,7 @@
 ﻿'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { CTABanner } from '@/components/sections/CTABanner'
@@ -131,25 +132,41 @@ export default function AboutPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="max-w-3xl mx-auto text-center"
+              className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center"
             >
-              <motion.h2 variants={fadeInDown} className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                Wie zijn wij?
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-lg text-slate-500 mb-6 leading-relaxed">
-                NextX Agency is een innovatieve digitale startup gevestigd in
-                Paramaribo, Suriname, die bedrijven helpt om professioneel
-                zichtbaar te worden en te groeien in de digitale wereld. Wij
-                combineren betaalbaarheid met professionaliteit door te werken met
-                een slimme template-based aanpak, waarbij we hoogwaardige
-                basis-templates volledig personaliseren naar de wensen, stijl en
-                &apos;vibe&apos; van elke klant.
-              </motion.p>
-              <motion.p variants={fadeInUp} className="text-lg text-slate-500 leading-relaxed">
-                Als lokale Surinaamse startup begrijpen wij de unieke uitdagingen
-                en kansen van de Surinaamse markt en bieden wij internationale
-                kwaliteit tegen lokaal toegankelijke prijzen.
-              </motion.p>
+              {/* Photo */}
+              <motion.div variants={slideInLeft} className="lg:col-span-2">
+                <div className="rounded-3xl overflow-hidden shadow-lg border border-slate-100">
+                  <Image
+                    src="https://images.unsplash.com/photo-1497366754035-f200581f9f2e?w=800&h=900&fit=crop&q=80"
+                    alt="NextX Agency team workspace"
+                    width={800}
+                    height={900}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Text */}
+              <div className="lg:col-span-3">
+                <motion.h2 variants={fadeInDown} className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                  Wie zijn wij?
+                </motion.h2>
+                <motion.p variants={fadeInUp} className="text-lg text-slate-500 mb-6 leading-relaxed">
+                  NextX Agency is een innovatieve digitale startup gevestigd in
+                  Paramaribo, Suriname, die bedrijven helpt om professioneel
+                  zichtbaar te worden en te groeien in de digitale wereld. Wij
+                  combineren betaalbaarheid met professionaliteit door te werken met
+                  een slimme template-based aanpak, waarbij we hoogwaardige
+                  basis-templates volledig personaliseren naar de wensen, stijl en
+                  &apos;vibe&apos; van elke klant.
+                </motion.p>
+                <motion.p variants={fadeInUp} className="text-lg text-slate-500 leading-relaxed">
+                  Als lokale Surinaamse startup begrijpen wij de unieke uitdagingen
+                  en kansen van de Surinaamse markt en bieden wij internationale
+                  kwaliteit tegen lokaal toegankelijke prijzen.
+                </motion.p>
+              </div>
             </motion.div>
           </div>
         </section>

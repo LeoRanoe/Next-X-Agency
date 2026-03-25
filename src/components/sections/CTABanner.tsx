@@ -10,6 +10,8 @@ function CTABannerFn() {
       {/* Subtle decorative circles */}
       <div className="absolute -left-32 -top-32 w-96 h-96 rounded-full bg-white/5 pointer-events-none" />
       <div className="absolute -right-32 -bottom-32 w-96 h-96 rounded-full bg-black/5 pointer-events-none" />
+      {/* Dot pattern overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <motion.div
