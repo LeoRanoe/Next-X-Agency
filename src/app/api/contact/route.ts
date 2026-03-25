@@ -1,4 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+import React from 'react'
+import { render } from '@react-email/render'
+import { ContactNotification } from '@/emails/ContactNotification'
+import { ContactConfirmation } from '@/emails/ContactConfirmation'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 interface ContactFormData {
   name: string
@@ -30,23 +37,101 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // In production, this would save to a database (Prisma/Supabase)
-    // and optionally send an email notification.
-    // For now, we log and return success.
-    console.log('New contact submission:', {
-      name: body.name,
-      email: body.email,
-      phone: body.phone || null,
-      service_type: body.service_type,
-      budget: body.budget || null,
-      message: body.message,
-      status: 'new',
-      created_at: new Date().toISOString(),
+    const agencyTo = process.env.CONTACT_TO_EMAIL ?? 'agencynextx@gmail.com'
+    const from = process.env.RESEND_FROM_EMAIL ?? 'noreply@nextxagency.com'
+    const receivedAt = new Date().toLocaleString('nl-NL', {
+      timeZone: 'America/Paramaribo',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
     })
+
+    // ── 1. Agency notification ────────────────────────────────────────────────
+    const notificationHtml = await render(
+      React.createElement(ContactNotification, {
+        name: body.name,
+        email: body.email,
+        phone: body.phone,
+        service_type: body.service_type,
+        budget: body.budget,
+        message: body.message,
+        receivedAt,
+      })
+    )
+
+    await resend.emails.send({
+      from,
+      to: agencyTo,
+      replyTo: body.email,
+      subject: `Nieuw contactverzoek: ${body.service_type} van ${body.name}`,
+      html: notificationHtml,
+      text: [
+        `Nieuw contactverzoek via nextxagency.com`,
+        ``,
+        `Naam:     ${body.name}`,
+        `E-mail:   ${body.email}`,
+        body.phone ? `Telefoon: ${body.phone}` : '',
+        `Dienst:   ${body.service_type}`,
+        body.budget ? `Budget:   ${body.budget}` : '',
+        ``,
+        `Bericht:`,
+        body.message,
+        ``,
+        receivedAt ? `Ontvangen: ${receivedAt}` : '',
+      ].filter(Boolean).join('\n'),
+      headers: {
+        'X-Priority': '1',
+        'X-MSMail-Priority': 'High',
+        'Importance': 'High',
+      },
+      tags: [
+        { name: 'category', value: 'contact-notification' },
+        { name: 'service', value: body.service_type.replace(/[^a-zA-Z0-9_\-]/g, '-').toLowerCase() },
+      ],
+    })
+
+    // ── 2. Client confirmation (best-effort) ──────────────────────────────────
+    try {
+      const confirmationHtml = await render(
+        React.createElement(ContactConfirmation, {
+          name: body.name,
+          email: body.email,
+          service_type: body.service_type,
+          budget: body.budget,
+          receivedAt,
+        })
+      )
+
+      await resend.emails.send({
+        from,
+        to: body.email,
+        subject: `Wij hebben uw aanvraag ontvangen — NextX Agency`,
+        html: confirmationHtml,
+        text: [
+          `Beste ${body.name},`,
+          ``,
+          `Bedankt voor uw aanvraag! We hebben het volgende ontvangen:`,
+          ``,
+          `Dienst:   ${body.service_type}`,
+          body.budget ? `Budget:   ${body.budget}` : '',
+          ``,
+          `Ons team neemt binnen 24 uur contact met u op.`,
+          ``,
+          `Met vriendelijke groet,`,
+          `NextX Agency`,
+          `nextxagency.com · +597 831-8508`,
+        ].filter(Boolean).join('\n'),
+        tags: [{ name: 'category', value: 'contact-confirmation' }],
+      })
+    } catch (confirmErr) {
+      console.error('Confirmation email failed (non-fatal):', confirmErr)
+    }
 
     return NextResponse.json({
       success: true,
-      message: 'Uw bericht is verzonden. Wij nemen binnen 24-48 uur contact op.',
+      message: 'Uw bericht is verzonden. Wij nemen binnen 24 uur contact op.',
     })
   } catch (error) {
     console.error('Contact route error:', error)
