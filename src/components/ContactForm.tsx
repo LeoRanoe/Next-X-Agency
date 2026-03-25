@@ -98,21 +98,27 @@ function ContactFormFn({ className = '' }: { className?: string }) {
 
   if (submitted) {
     return (
-      <div className={cn('bg-white border border-slate-100 rounded-3xl p-8 text-center', className)}>
-        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-          <Send size={24} className="text-primary" />
+      <div className={cn('bg-white rounded-3xl p-10 text-center shadow-xl shadow-slate-900/5 border border-slate-100', className)}>
+        {/* Animated green checkmark ring */}
+        <div className="w-20 h-20 rounded-full bg-emerald-50 border-2 border-emerald-200 flex items-center justify-center mx-auto mb-6">
+          <svg className="w-9 h-9 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
         </div>
-        <h3 className="text-lg font-bold text-slate-900 mb-2">
-          Bedankt voor uw bericht!
+        <h3 className="text-xl font-bold text-slate-900 mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+          Bericht verstuurd!
         </h3>
-        <p className="text-sm text-slate-500 mb-6">
-          Wij nemen binnen 24-48 uur contact met u op met een vrijblijvende
-          quote.
+        <p className="text-slate-500 text-sm mb-1">
+          Bedankt voor uw bericht.
+        </p>
+        <p className="text-slate-400 text-sm mb-8">
+          Wij nemen binnen 24-48 uur contact met u op met een vrijblijvende quote.
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="text-primary font-semibold text-sm hover:underline"
+          className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:text-orange-600 transition-colors"
         >
+          <Send size={14} />
           Nog een bericht sturen
         </button>
       </div>
@@ -122,79 +128,85 @@ function ContactFormFn({ className = '' }: { className?: string }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className={cn('bg-white border border-slate-100 rounded-3xl p-6 lg:p-8', className)}
+      className={cn('bg-white rounded-3xl p-6 lg:p-8 shadow-xl shadow-slate-900/5 border border-slate-100/80', className)}
     >
       <div className="space-y-5">
-        {/* Name */}
-        <div>
-          <label htmlFor="name" className="input-label">
-            Naam <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Uw volledige naam"
-            className="input-field"
-            required
-          />
+        {/* Name + Email — 2 columns on sm+ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Name */}
+          <div>
+            <label htmlFor="name" className="input-label">
+              Naam <span className="text-destructive">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Uw volledige naam"
+              className="input-field"
+              required
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="input-label">
+              Email <span className="text-destructive">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="uw@email.com"
+              className="input-field"
+              required
+            />
+          </div>
         </div>
 
-        {/* Email */}
-        <div>
-          <label htmlFor="email" className="input-label">
-            Email <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="uw@email.com"
-            className="input-field"
-            required
-          />
-        </div>
+        {/* Phone + Service — 2 columns on sm+ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Phone */}
+          <div>
+            <label htmlFor="phone" className="input-label">
+              Telefoon / WhatsApp
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="+597 XXX-XXXX"
+              className="input-field"
+            />
+          </div>
 
-        {/* Phone */}
-        <div>
-          <label htmlFor="phone" className="input-label">
-            Telefoon / WhatsApp
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="+597 XXX-XXXX"
-            className="input-field"
-          />
-        </div>
-
-        {/* Service */}
-        <div>
-          <label htmlFor="service_type" className="input-label">
-            Service interesse <span className="text-destructive">*</span>
-          </label>
-          <select
-            id="service_type"
-            name="service_type"
-            value={formData.service_type}
-            onChange={handleChange}
-            className="select-field"
-            required
-          >
-            <option value="">Kies een dienst...</option>
-            {serviceOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
+          {/* Service */}
+          <div>
+            <label htmlFor="service_type" className="input-label">
+              Service interesse <span className="text-destructive">*</span>
+            </label>
+            <select
+              id="service_type"
+              name="service_type"
+              value={formData.service_type}
+              onChange={handleChange}
+              className="select-field"
+              required
+            >
+              <option value="">Kies een dienst...</option>
+              {serviceOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Budget */}
@@ -230,7 +242,7 @@ function ContactFormFn({ className = '' }: { className?: string }) {
             value={formData.message}
             onChange={handleChange}
             placeholder="Beschrijf uw project, wensen en vragen..."
-            className="input-field min-h-[120px] resize-y"
+            className="input-field min-h-[130px] resize-y"
             required
             rows={5}
           />
@@ -247,7 +259,7 @@ function ContactFormFn({ className = '' }: { className?: string }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-orange-600 active:bg-orange-700 text-white shadow-sm hover:shadow-lg hover:shadow-orange-500/25 rounded-full font-bold text-sm px-5 py-4 transition-all duration-300 active:scale-[0.97] min-h-[48px] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-primary hover:bg-orange-600 active:bg-orange-700 text-white shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 rounded-full font-bold text-sm px-5 py-4 transition-all duration-300 active:scale-[0.97] min-h-[52px] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             <>
@@ -256,7 +268,7 @@ function ContactFormFn({ className = '' }: { className?: string }) {
             </>
           ) : (
             <>
-              <Send size={20} />
+              <Send size={18} />
               <span>Verstuur aanvraag</span>
             </>
           )}
