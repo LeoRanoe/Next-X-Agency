@@ -1,17 +1,28 @@
 ﻿'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { CTABanner } from '@/components/sections/CTABanner'
 import {
   fadeInUp,
   blurFadeIn,
-  slideInLeft,
   staggerContainer,
   staggerContainerFast,
   clipRevealUp,
 } from '@/lib/animationUtils'
+
+// All cards use brand colors only — orange + slate
+const categoryAccents = [
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+  { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
+] as const
 
 const serviceCategories = [
   {
@@ -20,9 +31,22 @@ const serviceCategories = [
     title: 'Graphic Marketing & Visual Design',
     description: 'Professionele visuele identiteit voor uw merk — van logo tot social media content.',
     services: [
-      { name: 'Logo Design', price: 'Vanaf $20', includes: '1 logo concept, 2 revisie rondes, export PNG/JPG (transparant + wit). Extra formats op aanvraag.' },
-      { name: 'Social Media Post Design', price: '$4 per post', includes: '1 design per post, 1 revisie ronde, Instagram/Facebook ready formaat (1080×1080 of 1080×1350).' },
-      { name: 'Flyer/Poster Design', price: 'Vanaf $8', includes: '1 design, 2 revisie rondes, print-ready PDF (A4/A5 standaard). Custom formaten mogelijk.' },
+      {
+        name: 'Logo Design',
+        price: 'Vanaf $20',
+        items: ['1 uniek logo concept', '2 gratis revisie rondes', 'PNG + JPG export (transparant & wit)', 'Alle bestandsformaten inbegrepen', 'Extra formaten op aanvraag'],
+      },
+      {
+        name: 'Social Media Post Design',
+        price: '$4 per post',
+        items: ['1 design per post', '1 revisie ronde inbegrepen', 'Instagram & Facebook formaat', '1080×1080 of 1080×1350', 'Print-ready bestand'],
+      },
+      {
+        name: 'Flyer/Poster Design',
+        price: 'Vanaf $8',
+        popular: true,
+        items: ['1 volledig ontwerp', '2 revisie rondes inbegrepen', 'Print-ready PDF export', 'A4 / A5 standaard formaat', 'Custom formaten mogelijk'],
+      },
     ],
   },
   {
@@ -31,10 +55,27 @@ const serviceCategories = [
     title: 'Websites & Online Presence',
     description: 'Volledig responsive websites gepersonaliseerd naar uw huisstijl, met SSL en basis SEO inbegrepen.',
     services: [
-      { name: 'Business Card Site', price: 'Vanaf $100', includes: 'One-page design, bedrijfsinfo, WhatsApp knop, contactformulier, responsive design, online publicatie.' },
-      { name: 'Service Website', price: 'Vanaf $120', includes: 'Multi-page site (Home, Diensten, Over Ons, Contact), responsive design, contactformulier, online publicatie.' },
-      { name: 'Portfolio Website', price: 'Vanaf $130', includes: "Portfolio galerij (max 20 items), project detail pagina's, over mij/ons, contact, responsive design." },
-      { name: 'Restaurant/Menu Site', price: 'Vanaf $130', includes: 'Digitaal menu (max 50 items), openingstijden, locatie/kaart, reserveringslink, responsive design.' },
+      {
+        name: 'Business Card Site',
+        price: 'Vanaf $100',
+        items: ['One-page gepersonaliseerd design', 'Bedrijfsinfo + WhatsApp knop', 'Contactformulier inbegrepen', 'Responsive op alle apparaten', 'SSL + online publicatie'],
+      },
+      {
+        name: 'Service Website',
+        price: 'Vanaf $120',
+        popular: true,
+        items: ['Multi-page (Home, Diensten, Contact)', 'Responsive design', 'Contactformulier inbegrepen', 'Over Ons pagina', 'SSL + online publicatie'],
+      },
+      {
+        name: 'Portfolio Website',
+        price: 'Vanaf $130',
+        items: ['Galerij tot 20 portfolio items', 'Project detail pagina\'s', 'Over mij/ons + contact', 'Responsive design', 'SSL + publicatie'],
+      },
+      {
+        name: 'Restaurant/Menu Site',
+        price: 'Vanaf $130',
+        items: ['Digitaal menu (max 50 items)', 'Openingstijden + locatie/kaart', 'Reserveringslink inbegrepen', 'Responsive design', 'SSL + publicatie'],
+      },
     ],
   },
   {
@@ -43,8 +84,17 @@ const serviceCategories = [
     title: 'E-Commerce Webshops',
     description: 'Complete webshops met winkelwagen, checkout en betalingsgateway integratie.',
     services: [
-      { name: 'Starter Webshop', price: 'Vanaf $280', includes: 'Max 25 producten, winkelwagen, checkout, betalingsgateway (Stripe/PayPal), responsive design, basis productbeheer instructies.' },
-      { name: 'Grotere Webshop', price: 'Vanaf $420', includes: 'Max 100 producten, categorieën, filters, zoekfunctie, klantaccounts, order tracking, meerdere betaalmethoden, uitgebreide instructies.' },
+      {
+        name: 'Starter Webshop',
+        price: 'Vanaf $280',
+        items: ['Max 25 producten', 'Winkelwagen + checkout', 'Stripe / PayPal integratie', 'Responsive design', 'Productbeheer instructies'],
+      },
+      {
+        name: 'Grotere Webshop',
+        price: 'Vanaf $420',
+        popular: true,
+        items: ['Max 100 producten', 'Categorieën, filters + zoeken', 'Klantaccounts + order tracking', 'Meerdere betaalmethoden', 'Uitgebreide beheer instructies'],
+      },
     ],
     note: 'Extra producten boven limiet: $2 per product (tot 250 producten). Meer dan 250 producten = custom pricing.',
   },
@@ -54,8 +104,17 @@ const serviceCategories = [
     title: 'UX/UI Design Services',
     description: 'Verbeter uw gebruikerservaring met professionele UX audits en UI re-designs.',
     services: [
-      { name: 'UX Audit & Advies', price: 'Vanaf $50', includes: 'Analyse van huidige website/app, verbeterpunten rapport (PDF), basis aanbevelingen.' },
-      { name: 'UI Design (Re-design)', price: 'Vanaf $90', includes: "Nieuw design voor max 3 pagina's/schermen, Figma/Adobe XD mockups, 2 revisie rondes. Implementatie apart geprijsd." },
+      {
+        name: 'UX Audit & Advies',
+        price: 'Vanaf $50',
+        items: ['Analyse huidige website/app', 'Verbeterpunten rapport (PDF)', 'Prioriteitslijst aanbevelingen', 'Opvolgingsgesprek inbegrepen', 'Basis quickfixes advies'],
+      },
+      {
+        name: 'UI Design (Re-design)',
+        price: 'Vanaf $90',
+        popular: true,
+        items: ['Nieuw design (max 3 pagina\'s)', 'Figma / Adobe XD mockups', '2 revisie rondes inbegrepen', 'Handoff documentatie', 'Implementatie apart geprijsd'],
+      },
     ],
   },
   {
@@ -64,8 +123,17 @@ const serviceCategories = [
     title: 'SEO & Online Zichtbaarheid',
     description: 'Verbeter uw vindbaarheid in zoekmachines met professionele SEO optimalisatie.',
     services: [
-      { name: 'Basic SEO Setup', price: 'Vanaf $30', includes: 'Meta tags optimalisatie, sitemap, Google Search Console setup, robots.txt configuratie.' },
-      { name: 'Maandelijkse SEO Support', price: '$25/maand', includes: 'Maandelijkse performance rapportage, keyword monitoring, content suggesties, technische checks. Min. 3 maanden contract.' },
+      {
+        name: 'Basic SEO Setup',
+        price: 'Vanaf $30',
+        items: ['Meta tags optimalisatie', 'Sitemap aanmaken', 'Google Search Console', 'Robots.txt configuratie', 'Basis SEO rapportage'],
+      },
+      {
+        name: 'Maandelijkse SEO Support',
+        price: '$25/maand',
+        popular: true,
+        items: ['Maandelijkse rapportage', 'Keyword monitoring', 'Content suggesties', 'Technische checks', 'Min. 3 maanden contract'],
+      },
     ],
   },
   {
@@ -74,9 +142,22 @@ const serviceCategories = [
     title: 'Webhosting & Technische Support',
     description: 'Betrouwbare hosting met SSL, dagelijkse backups en 99.9% uptime garantie.',
     services: [
-      { name: 'Hosting Setup (eenmalig)', price: '$15', includes: 'Hosting account aanmaken, domein koppeling, SSL installatie, website deployment.' },
-      { name: 'Basic Hosting', price: '$4/maand', includes: '10GB storage, 100GB bandwidth, SSL, dagelijkse backups, 99.9% uptime.' },
-      { name: 'Business Hosting', price: '$10/maand', includes: '50GB storage, onbeperkte bandwidth, SSL, CDN, dagelijkse backups, priority support, 99.9% uptime.' },
+      {
+        name: 'Hosting Setup',
+        price: '$15 eenmalig',
+        items: ['Hosting account aanmaken', 'Domein koppeling', 'SSL installatie', 'Website deployment', 'Eenmalige installatiekosten'],
+      },
+      {
+        name: 'Basic Hosting',
+        price: '$4/maand',
+        items: ['10GB storage', '100GB bandwidth', 'SSL inbegrepen', 'Dagelijkse backups', '99.9% uptime garantie'],
+      },
+      {
+        name: 'Business Hosting',
+        price: '$10/maand',
+        popular: true,
+        items: ['50GB storage', 'Onbeperkte bandwidth', 'SSL + CDN inbegrepen', 'Priority support', '99.9% uptime garantie'],
+      },
     ],
     note: 'Domein registratie niet inbegrepen — klant registreert eigen domein of wij verzorgen dit tegen kostprijs + $5 service fee.',
   },
@@ -86,9 +167,22 @@ const serviceCategories = [
     title: 'UX Kukru — Outsourcing Service',
     description: 'Toegang tot ons volledige NextX team via één dedicated specialist. Flexibele maandpakketten voor structurele digitale ondersteuning.',
     services: [
-      { name: 'Starter Support', price: '$90/maand', includes: '10 uur/maand, kleine updates, bug fixes, content wijzigingen, technisch advies, email support (48u response).' },
-      { name: 'Business Support', price: '$160/maand', includes: '20 uur/maand, feature development, design updates, integraties, strategisch advies, Slack support (24u response).' },
-      { name: 'Partner Support', price: '$260/maand', includes: '40 uur/maand, dedicated specialist, priority support, complexe projecten, team collaboration, direct contact (12u response).' },
+      {
+        name: 'Starter Support',
+        price: '$90/maand',
+        items: ['10 uur/maand', 'Kleine updates + bug fixes', 'Content wijzigingen', 'Technisch advies', 'Email support (48u)'],
+      },
+      {
+        name: 'Business Support',
+        price: '$160/maand',
+        popular: true,
+        items: ['20 uur/maand', 'Feature development', 'Design updates + integraties', 'Strategisch advies', 'Slack support (24u)'],
+      },
+      {
+        name: 'Partner Support',
+        price: '$260/maand',
+        items: ['40 uur/maand', 'Dedicated specialist', 'Priority + complex projecten', 'Team collaboration', 'Direct contact (12u)'],
+      },
     ],
     note: 'Extra uren boven pakket limiet: $12/uur. Alle pakketten vereisen minimaal 3 maanden commitment.',
   },
@@ -163,90 +257,123 @@ export default function ServicesPage() {
         {/* ── Service Categories ── */}
         <section className="pb-8">
           <div className="max-w-6xl mx-auto px-6">
-            {serviceCategories.map((category, catIndex) => (
-              <motion.div
-                key={category.id}
-                id={category.id}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.07 }}
-                variants={staggerContainerFast}
-                className="mb-16 last:mb-0 pt-16 border-t border-slate-100 first:border-0 first:pt-0"
-              >
-                {/* Category header */}
-                <motion.div variants={fadeInUp} className="mb-3">
-                  <div className="flex items-baseline flex-wrap gap-x-4 gap-y-1 mb-4">
-                    <span className="text-[11px] font-black tracking-[0.28em] uppercase text-primary/70">
-                      {String(catIndex + 1).padStart(2, '0')}
-                    </span>
-                    <h2
-                      className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight"
-                      style={{ fontFamily: 'var(--font-heading)' }}
-                    >
-                      {category.title}
-                    </h2>
-                    <span className="text-xs font-bold tracking-[0.16em] uppercase text-slate-400">
-                      — {category.tag}
-                    </span>
+            {serviceCategories.map((category, catIndex) => {
+              const accent = categoryAccents[catIndex % categoryAccents.length]
+              return (
+                <motion.div
+                  key={category.id}
+                  id={category.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.07 }}
+                  variants={staggerContainerFast}
+                  className="mb-20 last:mb-0 pt-16 border-t border-slate-100 first:border-0 first:pt-0"
+                >
+                  {/* Category header */}
+                  <motion.div variants={fadeInUp} className="mb-8">
+                    <div className="flex items-baseline flex-wrap gap-x-4 gap-y-1 mb-3">
+                      <span className="text-[11px] font-black tracking-[0.28em] uppercase text-primary/70">
+                        {String(catIndex + 1).padStart(2, '0')}
+                      </span>
+                      <h2
+                        className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight"
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                      >
+                        {category.title}
+                      </h2>
+                      <span className={`text-xs font-bold tracking-[0.16em] uppercase ${accent.text}`}>
+                        — {category.tag}
+                      </span>
+                    </div>
+                    <div className={`w-full h-px ${accent.bg} border-b ${accent.border} border-opacity-30`} />
+                    <p className="text-sm text-slate-400 mt-3 max-w-2xl leading-relaxed">
+                      {category.description}
+                    </p>
+                  </motion.div>
+
+                  {/* Service cards grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {category.services.map((service, i) => (
+                      <motion.div
+                        key={service.name}
+                        variants={fadeInUp}
+                        className={`relative flex flex-col rounded-2xl bg-white border transition-all duration-300 hover:shadow-lg overflow-hidden
+                          ${'popular' in service && service.popular
+                            ? `${accent.border} border-2 shadow-md`
+                            : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                      >
+                        {/* Card header */}
+                        <div className={`px-5 pt-5 pb-4 ${('popular' in service && service.popular) ? accent.bg : 'bg-slate-50/60'}`}>
+                          <div className="flex items-start justify-between gap-3 mb-1">
+                            {/* Index circle */}
+                            <span className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-black shrink-0 mt-0.5
+                              ${('popular' in service && service.popular) ? 'bg-primary text-white' : 'bg-slate-200 text-slate-500'}`}
+                            >
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            {/* Price badge */}
+                            <span className={`text-sm font-black tracking-tight whitespace-nowrap
+                              ${('popular' in service && service.popular) ? accent.text : 'text-slate-700'}`}
+                              style={{ fontFamily: 'var(--font-heading)' }}
+                            >
+                              {service.price}
+                            </span>
+                          </div>
+                          <h3
+                            className="text-[15px] font-bold text-slate-900 tracking-tight leading-snug mt-2"
+                            style={{ fontFamily: 'var(--font-heading)' }}
+                          >
+                            {service.name}
+                          </h3>
+                        </div>
+
+                        {/* Divider */}
+                        <div className={`h-px mx-5 ${('popular' in service && service.popular) ? `${accent.border} opacity-30` : 'bg-slate-100'}`} />
+
+                        {/* Feature bullets */}
+                        <ul className="flex-1 px-5 py-4 space-y-2.5">
+                          {service.items.map((item) => (
+                            <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">
+                              <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5
+                                ${('popular' in service && service.popular) ? 'bg-primary' : 'bg-slate-300'}`}
+                              />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* CTA footer */}
+                        <div className="px-5 pb-5 pt-2">
+                          <Link
+                            href={`/contact?dienst=${encodeURIComponent(service.name)}`}
+                            className={`block w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all duration-300
+                              ${('popular' in service && service.popular)
+                                ? 'bg-primary text-white hover:bg-orange-600 shadow-sm shadow-orange-500/20'
+                                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                              }`}
+                            style={{ fontFamily: 'var(--font-heading)' }}
+                          >
+                            Bestel nu →
+                          </Link>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                  <div className="w-full h-px bg-slate-200" />
-                  <p className="text-sm text-slate-400 mt-3 max-w-2xl leading-relaxed">
-                    {category.description}
-                  </p>
-                </motion.div>
 
-                {/* Service rows */}
-                <div className="mt-6">
-                  {category.services.map((service, i) => (
-                    <motion.div
-                      key={service.name}
+                  {/* Note */}
+                  {'note' in category && category.note && (
+                    <motion.p
                       variants={fadeInUp}
-                      className="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 py-5 px-4 -mx-4 rounded-2xl transition-all duration-300 hover:bg-primary/3 border-b border-slate-100 last:border-0 cursor-default"
+                      className="text-xs text-slate-500 mt-6 bg-slate-50 border-l-2 border-primary/50 rounded-r-xl px-4 py-3 leading-relaxed"
                     >
-                      {/* Index */}
-                      <span className="text-[11px] font-black tabular-nums text-slate-300 tracking-wider w-6 shrink-0 group-hover:text-primary transition-colors duration-300">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-
-                      {/* Name */}
-                      <span
-                        className="text-[15px] font-bold text-slate-900 tracking-tight w-52 shrink-0 group-hover:text-primary transition-colors duration-300"
-                        style={{ fontFamily: 'var(--font-heading)' }}
-                      >
-                        {service.name}
-                      </span>
-
-                      {/* Description */}
-                      <span className="text-sm text-slate-400 leading-relaxed flex-1">
-                        {service.includes}
-                      </span>
-
-                      {/* Dotted spacer */}
-                      <div className="hidden md:block w-16 border-b border-dashed border-slate-200 shrink-0 group-hover:border-primary/30 transition-colors duration-300" />
-
-                      {/* Price */}
-                      <span
-                        className="text-[15px] font-bold text-slate-700 shrink-0 group-hover:text-primary transition-colors duration-300 whitespace-nowrap"
-                        style={{ fontFamily: 'var(--font-heading)' }}
-                      >
-                        {service.price}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Note */}
-                {'note' in category && category.note && (
-                  <motion.p
-                    variants={fadeInUp}
-                    className="text-xs text-slate-500 mt-5 bg-slate-50 border-l-2 border-primary/50 rounded-r-xl px-4 py-3 leading-relaxed"
-                  >
-                    <strong className="text-slate-700 font-bold">Let op: </strong>
-                    {category.note}
-                  </motion.p>
-                )}
-              </motion.div>
-            ))}
+                      <strong className="text-slate-700 font-bold">Let op: </strong>
+                      {category.note}
+                    </motion.p>
+                  )}
+                </motion.div>
+              )
+            })}
           </div>
         </section>
 
