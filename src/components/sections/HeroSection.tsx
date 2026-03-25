@@ -197,6 +197,8 @@ function HeroSectionFn() {
     <header className="relative flex flex-col min-h-[90vh] justify-center pt-28 overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 pointer-events-none z-0 bg-grid-pattern opacity-60" />
+      {/* Top decorative gradient bar */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
       {/* Decorative concentric arcs — upper right */}
       <div

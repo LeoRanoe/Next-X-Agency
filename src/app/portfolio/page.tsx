@@ -41,16 +41,16 @@ export default function PortfolioPage() {
       <Navbar />
       <main>
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-slate-950">
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div
-              className="absolute inset-0 opacity-[0.04]"
-              style={{
-                backgroundImage: 'radial-gradient(circle, #f97015 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-              }}
-            />
-            <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-primary/40 to-transparent" />
+        <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden">
+          <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+          {/* Decorative arc */}
+          <div className="absolute -top-40 -right-40 w-[480px] h-[480px] pointer-events-none z-0" aria-hidden="true">
+            <svg viewBox="0 0 640 640" fill="none">
+              <circle cx="320" cy="320" r="290" stroke="#f97015" strokeWidth="1.5" opacity="0.06" />
+              <circle cx="320" cy="320" r="210" stroke="#f97015" strokeWidth="1" opacity="0.035" />
+            </svg>
           </div>
 
           <motion.div
@@ -61,16 +61,18 @@ export default function PortfolioPage() {
           >
             <motion.div
               variants={blurFadeIn}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-8"
+              className="flex items-center gap-4 mb-10"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Ons Werk
+              <div className="h-px w-8 bg-primary" style={{ opacity: 0.45 }} />
+              <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-slate-400">
+                Ons Werk
+              </span>
             </motion.div>
 
             <div className="overflow-hidden">
               <motion.h1
                 variants={clipRevealUp}
-                className="text-5xl md:text-7xl font-black tracking-tight text-white leading-[0.95] mb-1"
+                className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 leading-[0.95] mb-1"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 Recente

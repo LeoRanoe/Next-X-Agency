@@ -195,6 +195,7 @@ export default function ServicesPage() {
         {/* ── Hero ── */}
         <section className="relative pt-36 pb-20 overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
           {/* Decorative arc */}
           <div className="absolute -top-40 -right-40 w-160 h-160 pointer-events-none z-0" aria-hidden="true">

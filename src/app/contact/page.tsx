@@ -32,33 +32,18 @@ export default function ContactPage() {
     <>
       <Navbar />
       <main>
-        {/* ── Hero ── dark, dramatic, full-bleed */}
-        <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 overflow-hidden" style={{ background: '#0a0f1e' }}>
-          {/* Dark dot-grid */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.07]"
-            style={{ backgroundImage: 'radial-gradient(circle, #475569 1px, transparent 1px)', backgroundSize: '36px 36px' }}
-          />
+        {/* ── Hero ── */}
+        <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 overflow-hidden">
+          <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-          {/* Decorative concentric arcs — upper right */}
+          {/* Decorative arc */}
           <div className="absolute -top-40 -right-40 w-[480px] h-[480px] pointer-events-none z-0" aria-hidden="true">
-            <svg viewBox="0 0 680 680" fill="none">
-              <circle cx="340" cy="340" r="310" stroke="#f97015" strokeWidth="1" opacity="0.09" />
-              <circle cx="340" cy="340" r="240" stroke="#f97015" strokeWidth="0.8" opacity="0.055" />
-              <circle cx="340" cy="340" r="170" stroke="#f97015" strokeWidth="0.5" opacity="0.03" />
+            <svg viewBox="0 0 640 640" fill="none">
+              <circle cx="320" cy="320" r="290" stroke="#f97015" strokeWidth="1.5" opacity="0.06" />
+              <circle cx="320" cy="320" r="210" stroke="#f97015" strokeWidth="1" opacity="0.035" />
             </svg>
           </div>
-
-          {/* Decorative arc — lower left */}
-          <div className="absolute -bottom-32 -left-32 w-72 h-72 pointer-events-none z-0 opacity-40" aria-hidden="true">
-            <svg viewBox="0 0 400 400" fill="none">
-              <circle cx="200" cy="200" r="180" stroke="#f97015" strokeWidth="1" opacity="0.10" />
-              <circle cx="200" cy="200" r="120" stroke="#f97015" strokeWidth="0.5" opacity="0.06" />
-            </svg>
-          </div>
-
-          {/* Radial glow — top center */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[280px] rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <motion.div
             variants={staggerContainer}
@@ -68,15 +53,18 @@ export default function ContactPage() {
           >
             <motion.div
               variants={scaleIn}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6"
+              className="flex items-center justify-center gap-4 mb-8"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Neem Contact Op
+              <div className="h-px w-8 bg-primary" style={{ opacity: 0.45 }} />
+              <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-slate-400">
+                Neem Contact Op
+              </span>
+              <div className="h-px w-8 bg-primary" style={{ opacity: 0.45 }} />
             </motion.div>
 
             <motion.h1
               variants={blurFadeIn}
-              className="font-bold tracking-tight max-w-4xl mx-auto mb-6 text-white"
+              className="font-bold tracking-tight max-w-4xl mx-auto mb-6 text-slate-900"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontSize: 'clamp(2.6rem, 7vw, 5.5rem)',
@@ -96,13 +84,13 @@ export default function ContactPage() {
             {/* Trust bar */}
             <motion.div
               variants={fadeInUp}
-              className="inline-flex flex-wrap items-center justify-center gap-0 rounded-2xl bg-white/[0.04] border border-white/[0.08] overflow-hidden"
+              className="inline-flex flex-wrap items-center justify-center gap-0 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden"
             >
               {trustItems.map((item, i) => (
                 <div
                   key={item.value}
                   className={`text-center px-6 py-4 ${
-                    i < trustItems.length - 1 ? 'border-r border-white/[0.08]' : ''
+                    i < trustItems.length - 1 ? 'border-r border-slate-200' : ''
                   }`}
                 >
                   <p className="text-xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>
