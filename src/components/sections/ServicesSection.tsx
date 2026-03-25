@@ -127,7 +127,7 @@ function ServiceRow({ service, index }: { service: ServiceItem; index: number })
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 py-5 px-4 -mx-4 rounded-xl transition-all duration-300 hover:bg-primary/[0.035] border-b border-slate-100 last:border-0"
+      className="group flex items-center gap-4 py-5 px-4 -mx-4 rounded-xl transition-all duration-300 hover:bg-primary/[0.035] active:bg-primary/[0.05] border-b border-slate-100 last:border-0 border-l-2 border-l-transparent md:border-l-transparent active:border-l-primary/40 md:active:border-l-transparent"
     >
       {/* Row index */}
       <span className="text-[11px] font-black tabular-nums text-slate-300 tracking-wider w-6 shrink-0 group-hover:text-primary transition-colors duration-300">
@@ -152,14 +152,21 @@ function ServiceRow({ service, index }: { service: ServiceItem; index: number })
         <p className="text-sm text-slate-400 leading-snug mt-0.5 truncate max-w-xs">
           {description}
         </p>
+        {/* Mobile price row */}
+        <span
+          className="md:hidden inline-block mt-1.5 text-[13px] font-bold text-primary"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          {price}<span className="text-slate-400 text-xs font-medium ml-0.5">/ start</span>
+        </span>
       </div>
 
       {/* Dotted connector line — hidden on mobile */}
       <div className="hidden md:block flex-1 border-b border-dashed border-slate-200 mx-4 group-hover:border-primary/30 transition-colors duration-300" />
 
-      {/* Price */}
+      {/* Price — hidden on mobile (shown inline above) */}
       <span
-        className="text-[15px] font-bold text-slate-700 shrink-0 group-hover:text-primary transition-colors duration-300"
+        className="hidden md:inline text-[15px] font-bold text-slate-700 shrink-0 group-hover:text-primary transition-colors duration-300"
         style={{ fontFamily: 'var(--font-heading)' }}
       >
         {price}

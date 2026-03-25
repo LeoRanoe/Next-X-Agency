@@ -108,7 +108,7 @@ function CodeWindow() {
       initial={{ opacity: 0, x: 40, y: 10 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative w-full max-w-lg mx-auto lg:mx-0"
+      className="relative w-full max-w-[340px] sm:max-w-lg mx-auto lg:mx-0"
     >
       {/* Outer glow */}
       <div className="absolute -inset-px rounded-2xl bg-linear-to-br from-primary/20 via-transparent to-violet-500/10 blur-sm pointer-events-none" />
@@ -138,14 +138,14 @@ function CodeWindow() {
         </div>
 
         {/* Code body */}
-        <div className="px-5 py-4 font-mono text-[12.5px] leading-[1.75] overflow-hidden select-none">
+        <div className="px-3 py-3 sm:px-5 sm:py-4 font-mono text-[10px] sm:text-[12.5px] leading-[1.75] overflow-hidden select-none">
           {codeLines.map((line, lineIdx) => (
             <motion.div
               key={lineIdx}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.35, delay: 0.8 + lineIdx * 0.045, ease: 'easeOut' }}
-              className="flex items-baseline"
+              className={`flex items-baseline ${lineIdx >= 3 && lineIdx <= 14 ? 'hidden sm:flex' : ''}`}
             >
               {/* Line number */}
               <span className="w-6 shrink-0 text-right mr-5 text-slate-600 text-[11px] tabular-nums select-none">
@@ -183,7 +183,7 @@ function CodeWindow() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 1.6, ease: [0.34, 1.56, 0.64, 1] }}
-        className="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-lg border border-slate-100 px-4 py-2.5 flex items-center gap-2.5"
+        className="absolute bottom-2 right-2 sm:-bottom-4 sm:-right-4 bg-white rounded-2xl shadow-lg border border-slate-100 px-3 py-2 sm:px-4 sm:py-2.5 flex items-center gap-2 sm:gap-2.5"
       >
         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
         <span className="text-[12px] font-bold text-slate-800" style={{ fontFamily: 'var(--font-heading)' }}>Klaar in 48u</span>
@@ -200,7 +200,7 @@ function HeroSectionFn() {
 
       {/* Decorative concentric arcs — upper right */}
       <div
-        className="absolute -top-48 -right-48 w-170 h-170 pointer-events-none z-0"
+        className="absolute -top-24 -right-24 w-64 h-64 sm:-top-48 sm:-right-48 sm:w-170 sm:h-170 pointer-events-none z-0"
         aria-hidden="true"
       >
         <svg viewBox="0 0 680 680" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -241,7 +241,7 @@ function HeroSectionFn() {
                 <motion.span
                   variants={clipRevealUp}
                   className="block font-bold text-slate-900 leading-[0.9] tracking-tighter"
-                  style={{ fontSize: 'clamp(3.2rem, 7.5vw, 6.8rem)' }}
+                  style={{ fontSize: 'clamp(2.8rem, 7.5vw, 6.8rem)' }}
                 >
                   Uw digitale succes begint{' '}
                   <span className="relative inline-block">
@@ -275,7 +275,7 @@ function HeroSectionFn() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.85 }}
-              className="text-base md:text-lg text-slate-400 max-w-md mb-12 leading-relaxed font-medium"
+              className="text-base md:text-lg text-slate-400 max-w-md mb-8 sm:mb-12 leading-relaxed font-medium"
             >
               NextX Agency helpt Surinaamse bedrijven professioneel online te groeien —
               snel, betaalbaar en volledig op maat.
@@ -286,7 +286,7 @@ function HeroSectionFn() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.05 }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-16"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-10 sm:mb-16"
             >
               <MagneticButton>
                 <Link
@@ -329,7 +329,7 @@ function HeroSectionFn() {
           </div>
 
           {/* ── Right: code editor window ── */}
-          <div className="hidden lg:flex items-center justify-end pb-16">
+          <div className="flex items-center justify-center lg:justify-end pb-8 lg:pb-16">
             <CodeWindow />
           </div>
 

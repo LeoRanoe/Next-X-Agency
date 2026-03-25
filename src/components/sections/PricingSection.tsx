@@ -115,7 +115,7 @@ function PricingSectionFn() {
                 className={cn(
                   'bg-white rounded-3xl p-8 lg:p-10 h-full flex flex-col relative overflow-hidden transition-all duration-500 hover:-translate-y-2',
                   plan.highlighted
-                    ? 'border-2 border-primary/40 shadow-xl shadow-orange-500/5'
+                    ? 'border-2 border-primary/40 shadow-xl shadow-orange-500/5 ring-2 ring-primary/30 shadow-[0_0_32px_rgba(249,112,21,0.12)]'
                     : 'border border-slate-100 hover:shadow-lg hover:border-primary/20'
                 )}
               >

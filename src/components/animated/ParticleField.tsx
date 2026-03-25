@@ -32,6 +32,11 @@ export function ParticleField({
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     if (!ctx) return
 
+    // Reduce particles on mobile for performance
+    const isMobile = window.innerWidth < 768
+    const actualCount = isMobile ? Math.min(count, 20) : count
+    const isInteractive = isMobile ? false : interactive
+
     let W = canvas.offsetWidth
     let H = canvas.offsetHeight
     canvas.width = W
@@ -61,7 +66,7 @@ export function ParticleField({
       maxLife: 120 + Math.random() * 180,
     })
 
-    let particles: Particle[] = Array.from({ length: count }, () => {
+    let particles: Particle[] = Array.from({ length: actualCount }, () => {
       const p = makeParticle()
       p.y = Math.random() * H // spread on init
       p.life = Math.random() * p.maxLife
@@ -85,7 +90,7 @@ export function ParticleField({
           : 1 - (p.life - halfLife) / halfLife
 
         // Mouse repel
-        if (interactive) {
+        if (isInteractive) {
           const dx = p.x - mouse.current.x
           const dy = p.y - mouse.current.y
           const dist = Math.sqrt(dx * dx + dy * dy)

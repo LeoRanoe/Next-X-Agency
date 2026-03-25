@@ -34,18 +34,18 @@ function TestimonialsSectionFn() {
             </motion.p>
 
             {/* Stats row */}
-            <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-4">
-              <div className="text-center p-4 rounded-2xl border border-slate-700 bg-slate-800/50">
-                <p className="text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>100%</p>
-                <p className="text-xs text-slate-400 mt-1">Persoonlijke aandacht</p>
+            <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-2 sm:gap-4">
+              <div className="text-center p-3 sm:p-4 rounded-2xl border border-slate-700 bg-slate-800/50">
+                <p className="text-lg sm:text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>100%</p>
+                <p className="text-[10px] sm:text-xs text-slate-400 mt-1">Persoonlijke aandacht</p>
               </div>
-              <div className="text-center p-4 rounded-2xl border border-slate-700 bg-slate-800/50">
-                <p className="text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>48u</p>
-                <p className="text-xs text-slate-400 mt-1">Reactietijd</p>
+              <div className="text-center p-3 sm:p-4 rounded-2xl border border-slate-700 bg-slate-800/50">
+                <p className="text-lg sm:text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>48u</p>
+                <p className="text-[10px] sm:text-xs text-slate-400 mt-1">Reactietijd</p>
               </div>
-              <div className="text-center p-4 rounded-2xl border border-slate-700 bg-slate-800/50">
-                <p className="text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>Gratis</p>
-                <p className="text-xs text-slate-400 mt-1">Extra revisieronde</p>
+              <div className="text-center p-3 sm:p-4 rounded-2xl border border-slate-700 bg-slate-800/50">
+                <p className="text-lg sm:text-2xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>Gratis</p>
+                <p className="text-[10px] sm:text-xs text-slate-400 mt-1">Extra revisieronde</p>
               </div>
             </motion.div>
           </motion.div>

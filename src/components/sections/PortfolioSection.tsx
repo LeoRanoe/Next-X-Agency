@@ -109,7 +109,7 @@ export function PortfolioSection() {
             <motion.div
               key={project.title}
               variants={fadeInUp}
-              className="group relative flex flex-col rounded-2xl bg-slate-900 border border-slate-800 hover:border-primary/40 transition-all duration-300 overflow-hidden cursor-pointer"
+              className="group relative flex flex-col rounded-2xl bg-slate-900 border border-slate-800 hover:border-primary/40 transition-all duration-300 overflow-hidden cursor-pointer active:scale-[0.98]"
             >
               {/* Clickable overlay */}
               <Link
@@ -153,7 +153,7 @@ export function PortfolioSection() {
 
                 {/* Large ghost index */}
                 <span
-                  className="absolute bottom-1 right-3 text-6xl font-black text-white/4 leading-none select-none pointer-events-none z-10"
+                  className="absolute bottom-1 right-3 text-7xl sm:text-6xl font-black text-white/[0.06] sm:text-white/4 leading-none select-none pointer-events-none z-10"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   {project.index}
@@ -167,6 +167,9 @@ export function PortfolioSection() {
 
                 {/* Bottom orange glow line */}
                 <div className="h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
+
+                {/* Gradient overlay for richer visual on mobile */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent sm:hidden pointer-events-none z-10" />
               </div>
 
               {/* Card content */}

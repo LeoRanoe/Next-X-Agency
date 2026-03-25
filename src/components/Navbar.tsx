@@ -106,22 +106,36 @@ function NavbarFn() {
             className="md:hidden mt-3 glass-pill rounded-2xl shadow-lg overflow-hidden"
           >
             <div className="px-4 py-3 space-y-1">
-              {navLinks.map((link) => (
-                <Link
+              {navLinks.map((link, i) => (
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    'block px-4 py-3 text-sm font-semibold rounded-xl transition-colors',
-                    pathname === link.href
-                      ? 'text-primary bg-primary/5'
-                      : 'text-slate-700 hover:text-primary hover:bg-slate-50'
-                  )}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.25, delay: i * 0.06, ease: 'easeOut' }}
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      'flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-colors',
+                      pathname === link.href
+                        ? 'text-primary bg-primary/5'
+                        : 'text-slate-700 hover:text-primary hover:bg-slate-50'
+                    )}
+                  >
+                    {pathname === link.href && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    )}
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
-              <div className="pt-2 pb-1">
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.25, delay: navLinks.length * 0.06, ease: 'easeOut' }}
+                className="pt-2 pb-1"
+              >
                 <Link
                   href="/contact"
                   onClick={() => setMobileOpen(false)}
@@ -129,7 +143,7 @@ function NavbarFn() {
                 >
                   Start Project
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
