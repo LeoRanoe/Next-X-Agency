@@ -1,5 +1,6 @@
 ﻿'use client'
 
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
@@ -14,51 +15,23 @@ import {
 const projects = [
   {
     index: '01',
-    title: 'Tjin Catering',
-    category: 'Restaurant Website',
-    description: 'Complete restaurant website met digitaal menu, openingstijden en reserveringslink.',
-    tags: ['Web Design', 'Restaurant'],
+    title: 'Shop NextX',
+    category: 'E-Commerce',
+    description: 'Moderne webshop met productoverzicht, winkelwagen en een soepele checkout ervaring — volledig op maat gebouwd voor de Surinaamse markt.',
+    tags: ['E-Commerce', 'Webshop', 'Next.js'],
     accent: 'from-primary/30 via-orange-500/10',
+    url: 'shop-nextx.com',
+    href: 'https://www.shop-nextx.com/',
   },
   {
     index: '02',
-    title: 'RP Trading',
-    category: 'E-Commerce',
-    description: 'Webshop met productcatalogus, winkelwagen en Stripe betalingsintegratie.',
-    tags: ['E-Commerce', 'Webshop'],
-    accent: 'from-primary/20 via-orange-400/10',
-  },
-  {
-    index: '03',
-    title: 'Suri Style Boutique',
-    category: 'E-Commerce',
-    description: 'Mode webshop met klantaccounts, wishlist en order tracking systeem.',
-    tags: ['E-Commerce', 'Fashion'],
-    accent: 'from-primary/25 via-orange-500/10',
-  },
-  {
-    index: '04',
-    title: 'Green Garden Landscaping',
-    category: 'Service Website',
-    description: 'Multi-page service website met portfolio galerij en contactformulier.',
-    tags: ['Web Design', 'Services'],
-    accent: 'from-primary/20 via-orange-300/10',
-  },
-  {
-    index: '05',
-    title: 'Studio Kroon',
+    title: 'Indef Design',
     category: 'Portfolio Website',
-    description: "Fotografen portfolio met galerij, project detail pagina's en over mij sectie.",
-    tags: ['Portfolio', 'Fotografie'],
-    accent: 'from-primary/30 via-orange-400/10',
-  },
-  {
-    index: '06',
-    title: 'FreshBite Delivery',
-    category: 'Brand Identity',
-    description: 'Complete visuele identiteit — logo, social media templates en flyer designs.',
-    tags: ['Graphic Design', 'Branding'],
-    accent: 'from-primary/20 via-orange-500/10',
+    description: 'Strak creatief portfolio voor een design studio — modern, snel en volledig responsive met een unieke visuele stijl.',
+    tags: ['Portfolio', 'Web Design', 'Branding'],
+    accent: 'from-primary/20 via-orange-400/10',
+    url: 'indefdesign.com',
+    href: 'https://www.indefdesign.com/',
   },
 ] as const
 
@@ -120,27 +93,6 @@ export default function PortfolioPage() {
           </motion.div>
         </section>
 
-        {/* ── Disclaimer banner ── */}
-        <section className="pb-8 bg-white pt-16">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex items-start gap-3 px-5 py-4 rounded-2xl bg-primary/5 border border-primary/15 text-sm"
-            >
-              <svg className="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <p className="text-slate-600 leading-relaxed">
-                <strong className="text-slate-900 font-bold">Opmerking:</strong>{' '}
-                Dit zijn illustratieve voorbeeldprojecten die laten zien wat wij kunnen bouwen.
-                Wij zijn net gestart en bouwen ons portfolio op met echte klanten.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
         {/* ── Projects grid ── */}
         <section className="py-16 lg:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-6">
@@ -149,67 +101,66 @@ export default function PortfolioPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.05 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
             >
               {projects.map((project) => (
                 <motion.article
                   key={project.title}
                   variants={fadeInUp}
-                  className="group flex flex-col rounded-2xl border border-slate-200 overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/8 hover:-translate-y-1 transition-all duration-300"
+                  className="group flex flex-col rounded-2xl border border-slate-200 overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/8 hover:-translate-y-1 transition-all duration-300 cursor-pointer relative"
                 >
+                  {/* Clickable overlay */}
+                  <Link
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 z-30"
+                    aria-label={`View ${project.title}`}
+                  />
+                  
                   {/* Browser mockup */}
-                  <div className="relative bg-slate-900 overflow-hidden">
+                  <div className="relative bg-slate-900 overflow-hidden" style={{ height: '420px' }}>
                     {/* Chrome bar */}
                     <div className="flex items-center gap-1.5 px-3 py-2.5 bg-slate-800 border-b border-slate-700/50">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
                       <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
                       <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
                       <div className="ml-2 flex-1 rounded-md bg-slate-700/80 h-5 flex items-center px-2.5 gap-1.5">
-                        <svg className="w-2.5 h-2.5 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                        <svg className="w-2.5 h-2.5 text-emerald-400/70 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
-                        <span className="text-[9px] text-slate-500 font-mono truncate">nextx.agency/werk</span>
+                        <span className="text-[9px] text-slate-400 font-mono truncate">{project.url}</span>
                       </div>
                     </div>
 
-                    {/* Mockup website preview */}
-                    <div className="px-4 pt-4 pb-5 space-y-2.5">
-                      {/* Nav bar */}
-                      <div className="flex items-center justify-between">
-                        <div className="h-2 rounded bg-primary/50 w-10" />
-                        <div className="flex gap-2">
-                          <div className="h-1.5 rounded bg-slate-700 w-6" />
-                          <div className="h-1.5 rounded bg-slate-700 w-6" />
-                          <div className="h-1.5 rounded bg-slate-700 w-6" />
-                          <div className="h-5 rounded bg-primary/30 w-10" />
-                        </div>
-                      </div>
-                      {/* Hero block */}
-                      <div className="rounded-lg bg-slate-800 p-3 mt-1">
-                        <div className="h-2.5 rounded bg-white/20 w-3/5 mb-2" />
-                        <div className="h-1.5 rounded bg-white/10 w-4/5 mb-1" />
-                        <div className="h-1.5 rounded bg-white/10 w-2/3 mb-3" />
-                        <div className="h-5 rounded bg-primary/40 w-20" />
-                      </div>
-                      {/* Content blocks */}
-                      <div className="grid grid-cols-3 gap-2">
-                        <div className="h-8 rounded bg-slate-800" />
-                        <div className="h-8 rounded bg-slate-800" />
-                        <div className="h-8 rounded bg-slate-800 border border-primary/20" />
-                      </div>
+                    {/* Live website preview via iframe - Desktop view */}
+                    <div className="absolute top-11 left-0 w-full overflow-hidden" style={{ height: 'calc(100% - 44px)' }}>
+                      <iframe
+                        src={project.href}
+                        title={project.title}
+                        className="bg-white pointer-events-none origin-top-left"
+                        style={{
+                          border: 'none',
+                          height: '1080px',
+                          width: '1920px',
+                          transform: 'scale(0.33)',
+                          transformOrigin: 'top left',
+                        }}
+                      />
                     </div>
 
                     {/* Large ghost index */}
                     <span
-                      className="absolute bottom-1 right-3 text-6xl font-black text-white/4 leading-none select-none pointer-events-none"
+                      className="absolute bottom-1 right-3 text-6xl font-black text-white/4 leading-none select-none pointer-events-none z-10"
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
                       {project.index}
                     </span>
 
-                    {/* Voorbeeldproject pill */}
-                    <span className="absolute top-12 right-3 inline-flex items-center px-2 py-0.5 rounded-full bg-primary/20 border border-primary/30 text-primary text-[9px] font-bold tracking-widest uppercase">
-                      Voorbeeld
+                    {/* Live project pill */}
+                    <span className="absolute top-12 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[9px] font-bold tracking-widest uppercase z-10 pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Live
                     </span>
 
                     {/* Bottom orange glow line */}
@@ -238,7 +189,7 @@ export default function PortfolioPage() {
                     <p className="text-sm text-slate-500 leading-relaxed flex-1 mb-4">
                       {project.description}
                     </p>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
@@ -248,6 +199,20 @@ export default function PortfolioPage() {
                         </span>
                       ))}
                     </div>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        window.open(project.href, '_blank')
+                      }}
+                      className="relative z-40 inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-orange-600 transition-colors duration-200 tracking-wide uppercase"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      Bekijk live
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </button>
                   </div>
 
                   {/* Hover accent bottom */}

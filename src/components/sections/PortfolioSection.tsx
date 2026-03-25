@@ -12,39 +12,23 @@ import {
 const featured = [
   {
     index: '01',
-    title: 'Tjin Catering',
-    category: 'Restaurant Website',
+    title: 'Shop NextX',
+    category: 'E-Commerce',
     description:
-      'Complete restaurant website met digitaal menu, openingstijden en reserveringslink.',
-    tags: ['Web Design', 'Restaurant'],
+      'Moderne webshop met productoverzicht, winkelwagen en een soepele checkout ervaring — volledig op maat gebouwd voor de Surinaamse markt.',
+    tags: ['E-Commerce', 'Webshop', 'Next.js'],
     accent: 'from-primary/30 via-orange-500/10',
+    href: 'https://www.shop-nextx.com/',
   },
   {
     index: '02',
-    title: 'RP Trading',
-    category: 'E-Commerce',
+    title: 'Indef Design',
+    category: 'Portfolio Website',
     description:
-      'Webshop met productcatalogus, winkelwagen en Stripe betalingsintegratie.',
-    tags: ['E-Commerce', 'Webshop'],
+      'Strak creatief portfolio voor een design studio — modern, snel en volledig responsive met een unieke visuele stijl.',
+    tags: ['Portfolio', 'Web Design', 'Branding'],
     accent: 'from-primary/20 via-orange-400/10',
-  },
-  {
-    index: '03',
-    title: 'Suri Style Boutique',
-    category: 'E-Commerce',
-    description:
-      'Mode webshop met klantaccounts, wishlist en order tracking systeem.',
-    tags: ['E-Commerce', 'Fashion'],
-    accent: 'from-primary/25 via-orange-500/10',
-  },
-  {
-    index: '04',
-    title: 'FreshBite Delivery',
-    category: 'Brand Identity',
-    description:
-      'Complete visuele identiteit — logo, social media templates en flyer designs.',
-    tags: ['Graphic Design', 'Branding'],
-    accent: 'from-primary/20 via-orange-300/10',
+    href: 'https://www.indefdesign.com/',
   },
 ] as const
 
@@ -125,31 +109,64 @@ export function PortfolioSection() {
             <motion.div
               key={project.title}
               variants={fadeInUp}
-              className="group relative flex flex-col rounded-2xl bg-slate-900 border border-slate-800 hover:border-primary/40 transition-all duration-300 overflow-hidden"
+              className="group relative flex flex-col rounded-2xl bg-slate-900 border border-slate-800 hover:border-primary/40 transition-all duration-300 overflow-hidden cursor-pointer"
             >
-              {/* Gradient header strip */}
-              <div
-                className={`h-28 bg-linear-to-br ${project.accent} to-transparent relative flex items-end px-6 pb-4`}
-              >
-                {/* Mockup chrome lines */}
-                <div className="absolute top-5 left-6 flex gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700/60" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700/60" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700/60" />
-                </div>
-                <div className="absolute top-10 left-6 right-6 space-y-1.5">
-                  <div className="h-1.5 rounded-full bg-slate-700/40 w-3/4" />
-                  <div className="h-1.5 rounded-full bg-slate-700/30 w-1/2" />
-                  <div className="h-1.5 rounded-full bg-slate-700/20 w-2/3" />
+              {/* Clickable overlay */}
+              <Link
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-30"
+                aria-label={`View ${project.title}`}
+              />
+
+              {/* Browser mockup */}
+              <div className="relative bg-slate-900 overflow-hidden" style={{ height: '420px' }}>
+                {/* Chrome bar */}
+                <div className="flex items-center gap-1.5 px-3 py-2.5 bg-slate-800 border-b border-slate-700/50">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+                  <div className="ml-2 flex-1 rounded-md bg-slate-700/80 h-5 flex items-center px-2.5 gap-1.5">
+                    <svg className="w-2.5 h-2.5 text-emerald-400/70 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span className="text-[9px] text-slate-400 font-mono truncate">{project.href.replace('https://', '').replace('www.', '')}</span>
+                  </div>
                 </div>
 
-                {/* Index */}
+                {/* Live website preview via iframe - Desktop view */}
+                <div className="absolute top-11 left-0 w-full overflow-hidden" style={{ height: 'calc(100% - 44px)' }}>
+                  <iframe
+                    src={project.href}
+                    title={project.title}
+                    className="bg-white pointer-events-none origin-top-left"
+                    style={{
+                      border: 'none',
+                      height: '1080px',
+                      width: '1920px',
+                      transform: 'scale(0.33)',
+                      transformOrigin: 'top left',
+                    }}
+                  />
+                </div>
+
+                {/* Large ghost index */}
                 <span
-                  className="absolute top-5 right-6 text-xs font-black text-primary/60 tracking-widest"
+                  className="absolute bottom-1 right-3 text-6xl font-black text-white/4 leading-none select-none pointer-events-none z-10"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   {project.index}
                 </span>
+
+                {/* Live project pill */}
+                <span className="absolute top-12 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[9px] font-bold tracking-widest uppercase z-10 pointer-events-none">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live
+                </span>
+
+                {/* Bottom orange glow line */}
+                <div className="h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
               </div>
 
               {/* Card content */}
@@ -186,16 +203,20 @@ export function PortfolioSection() {
               {/* Hover accent line */}
               <div className="h-px mx-6 bg-slate-800 group-hover:bg-primary/30 transition-colors duration-300" />
               <div className="px-6 py-4">
-                <Link
-                  href="/portfolio"
-                  className="text-xs font-bold text-slate-500 group-hover:text-primary transition-colors duration-200 tracking-wide uppercase flex items-center gap-1.5"
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    window.open(project.href, '_blank')
+                  }}
+                  className="relative z-40 text-xs font-bold text-slate-500 group-hover:text-primary transition-colors duration-200 tracking-wide uppercase flex items-center gap-1.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  Bekijk project
+                  Bekijk live
                   <span className="group-hover:translate-x-0.5 transition-transform duration-200">
                     →
                   </span>
-                </Link>
+                </button>
               </div>
             </motion.div>
           ))}

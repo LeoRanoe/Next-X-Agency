@@ -225,11 +225,11 @@ function HeroSectionFn() {
             >
               <div className="h-px w-8 bg-primary" style={{ opacity: 0.45 }} />
               <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-slate-400">
-                Digitale Bureau · Suriname · 50+ Projecten
+                Digitale Bureau · Suriname
               </span>
             </motion.div>
 
-            {/* Giant typographic headline — each line clip-reveals independently */}
+            {/* Giant typographic headline */}
             <motion.h1
               variants={staggerContainer}
               initial="hidden"
@@ -243,27 +243,7 @@ function HeroSectionFn() {
                   className="block font-bold text-slate-900 leading-[0.9] tracking-tighter"
                   style={{ fontSize: 'clamp(3.2rem, 7.5vw, 6.8rem)' }}
                 >
-                  Uw digitale
-                </motion.span>
-              </span>
-
-              <span className="block overflow-hidden">
-                <motion.span
-                  variants={clipRevealUp}
-                  className="block font-bold text-slate-900 leading-[0.9] tracking-tighter"
-                  style={{ fontSize: 'clamp(3.2rem, 7.5vw, 6.8rem)' }}
-                >
-                  succes
-                </motion.span>
-              </span>
-
-              <span className="block overflow-hidden">
-                <motion.span
-                  variants={clipRevealUp}
-                  className="block font-bold text-slate-900 leading-[0.9] tracking-tighter"
-                  style={{ fontSize: 'clamp(3.2rem, 7.5vw, 6.8rem)' }}
-                >
-                  begint{' '}
+                  Uw digitale succes begint{' '}
                   <span className="relative inline-block">
                     <span className="text-primary text-glow-orange">hier.</span>
                     {/* Animated wavy underline */}
@@ -345,21 +325,7 @@ function HeroSectionFn() {
               </Link>
             </motion.div>
 
-            {/* Stats strip — inline with separators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.3 }}
-              className="flex flex-wrap items-center gap-y-2 pb-16 text-sm text-slate-400 font-medium"
-            >
-              <span><span className="text-slate-800 font-bold text-[15px]">50+</span>&nbsp;Projecten</span>
-              <span className="mx-5 text-slate-200 select-none">·</span>
-              <span><span className="text-slate-800 font-bold text-[15px]">30+</span>&nbsp;Klanten</span>
-              <span className="mx-5 text-slate-200 select-none">·</span>
-              <span><span className="text-slate-800 font-bold text-[15px]">48u</span>&nbsp;Reactietijd</span>
-              <span className="mx-5 text-slate-200 select-none">·</span>
-              <span><span className="text-slate-800 font-bold text-[15px]">100%</span>&nbsp;Op maat</span>
-            </motion.div>
+
           </div>
 
           {/* ── Right: code editor window ── */}
