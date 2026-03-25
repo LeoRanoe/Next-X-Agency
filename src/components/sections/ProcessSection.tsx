@@ -81,15 +81,17 @@ function ProcessSectionFn() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-primary/20 to-transparent -translate-x-1/2 hidden md:block" />
+          {/* Desktop vertical center line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-transparent via-primary/20 to-transparent -translate-x-1/2 hidden md:block" />
+          {/* Mobile left line */}
+          <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-linear-to-b from-transparent via-primary/20 to-transparent md:hidden" />
 
           <motion.div
             variants={staggerContainerSlow}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="space-y-16 md:space-y-24"
+            className="space-y-10 md:space-y-24"
           >
             {steps.map((step, index) => {
               const isLeft = index % 2 === 0
@@ -97,83 +99,105 @@ function ProcessSectionFn() {
                 <motion.div
                   key={step.number}
                   variants={fadeInUp}
-                  className="relative md:flex items-center justify-between w-full group"
+                  className="group"
                 >
-                  {/* Left side content */}
-                  <div className={`md:w-[42%] ${isLeft ? 'md:text-right' : ''}`}>
-                    {isLeft ? (
-                      <>
-                        <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
-                          Fase {String(step.number).padStart(2, '0')}
-                        </span>
-                        <h3 className="text-2xl font-bold mt-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                          {step.title}
-                        </h3>
-                        <p className="text-slate-500 mt-3 leading-relaxed text-sm">
-                          {step.description}
-                        </p>
-                      </>
-                    ) : (
-                      <ul className="space-y-3 mt-4 md:mt-0">
+                  {/* ── Mobile layout: left-aligned vertical stack ── */}
+                  <div className="flex items-start gap-5 md:hidden">
+                    {/* Icon node */}
+                    <div className="relative shrink-0 z-10">
+                      <div className={`w-12 h-12 rounded-xl bg-white border-2 ${phaseColors[index]} shadow-sm flex items-center justify-center`}>
+                        <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d={step.icon} />
+                        </svg>
+                      </div>
+                    </div>
+                    {/* Content */}
+                    <div className="flex-1 pb-2">
+                      <span className="text-primary font-bold text-xs tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                        Fase {String(step.number).padStart(2, '0')}
+                      </span>
+                      <h3 className="text-xl font-bold mt-1 mb-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                        {step.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-3">
+                        {step.description}
+                      </p>
+                      <ul className="space-y-2">
                         {step.items.map((item) => (
-                          <li key={item} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
-                            <svg className="w-5 h-5 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                            </svg>
+                          <li key={item} className="flex items-center gap-2.5 text-slate-600 text-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                             {item}
                           </li>
                         ))}
                       </ul>
-                    )}
+                    </div>
                   </div>
 
-                  {/* Center node */}
-                  <div className="relative z-10 flex items-center justify-center md:order-2 my-4 md:my-0">
-                    <motion.div
-                      className={`w-16 h-16 rounded-2xl bg-white border-2 ${phaseColors[index]} shadow-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg`}
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d={step.icon} />
-                      </svg>
-                    </motion.div>
-                  </div>
+                  {/* ── Desktop layout: zigzag alternating ── */}
+                  <div className="hidden md:flex items-center justify-between w-full">
+                    {/* Left column */}
+                    <div className={`w-[42%] ${isLeft ? 'text-right' : ''}`}>
+                      {isLeft ? (
+                        <>
+                          <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                            Fase {String(step.number).padStart(2, '0')}
+                          </span>
+                          <h3 className="text-2xl font-bold mt-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                            {step.title}
+                          </h3>
+                          <p className="text-slate-500 mt-3 leading-relaxed text-sm">
+                            {step.description}
+                          </p>
+                        </>
+                      ) : (
+                        <ul className="space-y-3">
+                          {step.items.map((item) => (
+                            <li key={item} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
 
-                  {/* Right side content */}
-                  <div className={`md:w-[42%] ${!isLeft ? 'md:text-right' : ''}`}>
-                    {isLeft ? (
-                      <ul className="space-y-3 mt-4 md:mt-0">
-                        {step.items.map((item) => (
-                          <li key={item} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
-                            <svg className="w-5 h-5 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                            </svg>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <>
-                        <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
-                          Fase {String(step.number).padStart(2, '0')}
-                        </span>
-                        <h3 className="text-2xl font-bold mt-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                          {step.title}
-                        </h3>
-                        <p className="text-slate-500 mt-3 leading-relaxed text-sm">
-                          {step.description}
-                        </p>
-                      </>
-                    )}
-                  </div>
+                    {/* Center node */}
+                    <div className="relative z-10 flex items-center justify-center">
+                      <motion.div
+                        className={`w-16 h-16 rounded-2xl bg-white border-2 ${phaseColors[index]} shadow-md flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg`}
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d={step.icon} />
+                        </svg>
+                      </motion.div>
+                    </div>
 
-                  {/* Mobile-only phase label */}
-                  <div className="md:hidden -order-1 mb-2">
-                    <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
-                      Fase {String(step.number).padStart(2, '0')}
-                    </span>
-                    <h3 className="text-xl font-bold text-slate-900">{step.title}</h3>
-                    <p className="text-slate-500 mt-1 text-sm">{step.description}</p>
+                    {/* Right column */}
+                    <div className={`w-[42%] ${!isLeft ? 'text-right' : ''}`}>
+                      {isLeft ? (
+                        <ul className="space-y-3">
+                          {step.items.map((item) => (
+                            <li key={item} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <>
+                          <span className="text-primary font-bold text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                            Fase {String(step.number).padStart(2, '0')}
+                          </span>
+                          <h3 className="text-2xl font-bold mt-2 text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                            {step.title}
+                          </h3>
+                          <p className="text-slate-500 mt-3 leading-relaxed text-sm">
+                            {step.description}
+                          </p>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               )

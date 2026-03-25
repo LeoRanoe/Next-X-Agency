@@ -13,6 +13,12 @@ const features = [
   {
     title: 'Snel Geleverd',
     description: 'Geoptimaliseerde workflows zorgen voor snelle oplevering zonder kwaliteitsverlies.',
+    breakdown: [
+      'Oplevering binnen 48–72 uur',
+      'Vaste afgesproken deadline',
+      'Directe communicatie via WhatsApp',
+      'Geen eindeloze wachttijden',
+    ],
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -22,6 +28,12 @@ const features = [
   {
     title: 'Smart Budget',
     description: 'Slimme technologie-integratie zorgt voor premium output tegen competitieve tarieven.',
+    breakdown: [
+      'Transparante, vaste prijzen',
+      'Geen verborgen kosten',
+      'Flexibele betaalmogelijkheden',
+      'Gratis eerste adviesgesprek',
+    ],
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="10" />
@@ -33,6 +45,12 @@ const features = [
   {
     title: 'Custom Design',
     description: 'Elk project wordt volledig gepersonaliseerd naar uw merkidentiteit en doelgroep.',
+    breakdown: [
+      '100% uniek ontwerp — geen templates',
+      'Afgestemd op uw merk en doelgroep',
+      'Meerdere revisierondes inbegrepen',
+      'Responsive op alle apparaten',
+    ],
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -42,6 +60,12 @@ const features = [
   {
     title: 'Lokaal Netwerk',
     description: 'Geworteld in Paramaribo met een globaal perspectief en sterke lokale connecties.',
+    breakdown: [
+      'Persoonlijk contact met de oprichter',
+      'Kennis van de Surinaamse markt',
+      'Snelle lokale support',
+      'Netwerk van lokale partners',
+    ],
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -88,20 +112,31 @@ function WhySectionFn() {
             <motion.div
               key={feature.title}
               variants={fadeInUp}
-              className="group flex gap-5 p-6 rounded-2xl bg-white border border-slate-100 transition-all duration-300 hover:border-primary/25 hover:shadow-md"
+              className="group flex flex-col gap-5 p-6 rounded-2xl bg-white border border-slate-100 transition-all duration-300 hover:border-primary/25 hover:shadow-md"
             >
-              {/* Icon */}
-              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                {feature.icon}
+              {/* Icon + title row */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  {feature.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-slate-900 mb-1.5 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                  {feature.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
+              {/* Breakdown */}
+              <ul className="space-y-2 border-t border-slate-100 pt-4">
+                {feature.breakdown.map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-slate-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </motion.div>
