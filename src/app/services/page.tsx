@@ -13,6 +13,27 @@ import {
   clipRevealUp,
 } from '@/lib/animationUtils'
 
+// Map service names to their demo page slugs
+const demoSlugs: Record<string, string> = {
+  'Logo Design': '/examples/logo-branding',
+  'Business Card Site': '/examples/business-card-site',
+  'Service Website': '/examples/service-website',
+  'Portfolio Website': '/examples/portfolio-website',
+  'Restaurant/Menu Site': '/examples/restaurant-menu-site',
+  'Starter Webshop': '/examples/starter-webshop',
+  'Grotere Webshop': '/examples/grotere-webshop',
+  'UX Audit & Advies': '/examples/ux-ui-design',
+  'UI Design (Re-design)': '/examples/ux-ui-design',
+  'Basic SEO Setup': '/examples/seo',
+  'Maandelijkse SEO Support': '/examples/seo',
+  'Hosting Setup': '/examples/hosting',
+  'Basic Hosting': '/examples/hosting',
+  'Business Hosting': '/examples/hosting',
+  'Starter Support': '/examples/ux-kukru',
+  'Business Support': '/examples/ux-kukru',
+  'Partner Support': '/examples/ux-kukru',
+}
+
 // All cards use brand colors only — orange + slate
 const categoryAccents = [
   { border: 'border-primary', bg: 'bg-primary/5', dot: 'bg-primary', text: 'text-primary' },
@@ -346,7 +367,7 @@ export default function ServicesPage() {
                         </ul>
 
                         {/* CTA footer */}
-                        <div className="px-5 pb-5 pt-2">
+                        <div className="px-5 pb-5 pt-2 space-y-2">
                           <Link
                             href={`/contact?dienst=${encodeURIComponent(service.name)}`}
                             className={`block w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all duration-300
@@ -358,6 +379,15 @@ export default function ServicesPage() {
                           >
                             Bestel nu →
                           </Link>
+                          {demoSlugs[service.name] && (
+                            <Link
+                              href={demoSlugs[service.name]}
+                              className="block w-full text-center text-xs font-bold text-primary hover:text-orange-600 py-1.5 transition-colors duration-200"
+                              style={{ fontFamily: 'var(--font-heading)' }}
+                            >
+                              Bekijk voorbeeld →
+                            </Link>
+                          )}
                         </div>
                       </motion.div>
                     ))}
