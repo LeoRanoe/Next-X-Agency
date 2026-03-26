@@ -3,8 +3,18 @@ import Link from 'next/link'
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
-  title: 'Voorbeelden — NextX Agency',
-  description: 'Demo voorbeelden van onze diensten. Bekijk wat NextX Agency voor u kan bouwen.',
+  title: 'Voorbeelden',
+  description:
+    'Interactieve demo voorbeelden van alle NextX Agency diensten — websites, webshops, logo design, UX/UI, SEO dashboards, hosting panels en meer.',
+  openGraph: {
+    title: 'Voorbeelden — NextX Agency',
+    description:
+      'Bekijk interactieve demo\'s van onze diensten. Websites, webshops, branding en meer.',
+    url: '/examples',
+  },
+  alternates: {
+    canonical: '/examples',
+  },
 }
 
 export default function ExamplesLayout({ children }: { children: React.ReactNode }) {

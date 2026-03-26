@@ -3,8 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Voorbeelden — NextX Agency',
-  description: 'Bekijk demo voorbeelden van al onze diensten.',
+  title: 'Alle Voorbeelden',
+  description:
+    'Bekijk alle demo voorbeelden van NextX Agency — websites, webshops, logo branding, UX/UI design, SEO en hosting. Interactieve previews van onze diensten.',
 }
 
 const examples = [
