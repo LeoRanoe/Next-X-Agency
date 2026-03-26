@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Palette, Type, BookOpen, Smartphone, Download, Copy, Check, Eye, Layers, Droplets, Grid3X3, Sparkles } from 'lucide-react'
 import { toast } from 'sonner'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Animated SVG Logo ─── */
 function SavanaLogoFull() {
@@ -291,6 +292,8 @@ export default function SavanaCoffeePage() {
           <p className="text-sm text-stone-500">Case study door Next‑X Agency · 2025</p>
         </div>
       </footer>
+
+      <DemoFeatures features={['Geanimeerd SVG logo (Framer Motion path draw)', 'Tab navigatie: logo / kleuren / typografie / toepassingen', 'Kleurpalet met clipboard-kopiëren + toast', 'Typografie specimen met type scale', 'Brand mock-up foto\'s (verpakking, social, signage)', 'Download Brandbook knop']} />
     </div>
   )
 }

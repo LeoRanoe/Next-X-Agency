@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import { Phone, Mail, MapPin, Instagram, Facebook, Linkedin, ChevronRight, Hammer, HardHat, Home, PaintBucket, ArrowUp } from 'lucide-react'
 import { toast } from 'sonner'
 import FloatingWhatsApp from '../_components/FloatingWhatsApp'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── SVG Logo ─── */
 function KaderBouwLogo({ className = '', size = 40 }: { className?: string; size?: number }) {
@@ -304,7 +305,8 @@ export default function KaderBouwPage() {
         </div>
       </footer>
 
-      <a href="#" className="fixed bottom-6 left-6 z-30 w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f97015] transition-colors shadow-lg" aria-label="Naar boven"><ArrowUp className="w-4 h-4" /></a>
+      <DemoFeatures features={['Geanimeerde tellers (useInView)', 'Contactformulier + validatie', 'Toast notificaties (Sonner)', 'SVG logo', 'Unsplash foto\'s', 'WhatsApp integratie']} />
+      <a href="#" className="fixed bottom-20 left-6 z-30 w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f97015] transition-colors shadow-lg" aria-label="Naar boven"><ArrowUp className="w-4 h-4" /></a>
       <FloatingWhatsApp phone="5978523456" company="KaderBouw NV" message="Hallo, ik heb interesse in een bouwproject!" />
     </div>
   )

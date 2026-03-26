@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Users, Zap, Shield, BarChart3, MessageSquare, Star, Check, ArrowRight, Phone, Mail, MapPin, Send, Heart, Globe, Layers } from 'lucide-react'
 import { toast } from 'sonner'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Logo ─── */
 function KukruLogo({ size = 36 }: { size?: number }) {
@@ -350,6 +351,8 @@ export default function UxKukruPage() {
           </div>
         </div>
       </footer>
+
+      <DemoFeatures features={['FAQ accordion (AnimatePresence)', 'Team foto\'s met Unsplash', '3 prijspakketten vergelijking', 'Pulserende \'Meest gekozen\' badge', 'Contactformulier + validatie + toast', 'Double Diamond procesvisualisatie']} />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Clock, MapPin, Phone, Utensils, Leaf, Flame, Fish, IceCreamCone, Star, Users, CalendarDays, ChevronDown, ChevronUp } from 'lucide-react'
 import { toast } from 'sonner'
 import FloatingWhatsApp from '../_components/FloatingWhatsApp'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Logo ─── */
 function WarungLogo({ size = 36 }: { size?: number }) {
@@ -279,6 +280,7 @@ export default function WarungIndahPage() {
         </div>
       </footer>
 
+      <DemoFeatures features={['Live openingstijden indicator', '5 menucategorieën met uitklapbare items', 'Badges: Populair / Pittig / Veganistisch', 'Reserveringsformulier + validatie + toast', 'Google Maps iframe', 'WhatsApp integratie']} />
       <FloatingWhatsApp phone="5974551234" company="Warung Indah" message="Hallo! Ik wil graag bestellen of reserveren." />
     </div>
   )

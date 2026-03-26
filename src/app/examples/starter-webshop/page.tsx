@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ShoppingBag, X, Plus, Minus, Trash2, Search, Heart, Star, ChevronRight, Truck, RefreshCw, Shield } from 'lucide-react'
 import { toast } from 'sonner'
 import FloatingWhatsApp from '../_components/FloatingWhatsApp'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Logo ─── */
 function BloomLogo({ size = 36 }: { size?: number }) {
@@ -355,6 +356,7 @@ export default function BloomBoutiquePage() {
         </div>
       </footer>
 
+      <DemoFeatures features={['Werkende winkelwagen (useState: add/remove/qty)', 'Cart drawer (Framer Motion slide-in)', 'Volledige checkout flow (stap 0 → 1)', 'Zoekbalk + categorie filter', 'Wishlist met harten', 'WhatsApp integratie']} />
       <FloatingWhatsApp phone="5974567890" company="Bloom Boutique" message="Hoi! Ik heb een vraag over een product." />
     </div>
   )

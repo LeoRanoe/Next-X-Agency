@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ExternalLink, Instagram, Mail } from 'lucide-react'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── SVG Logo ─── */
 function StudioVibeLogo({ size = 36 }: { size?: number }) {
@@ -206,6 +207,8 @@ export default function StudioVibePage() {
           <p className="text-sm text-slate-500">© 2025 Studio Vibe. Paramaribo, Suriname.</p>
         </div>
       </footer>
+
+      <DemoFeatures features={['Categorie filter tabs (useState)', 'AnimatePresence filter animatie', 'Lightbox modal met project details', 'Statistieken sectie', 'Dot-grid hero achtergrond', 'CTA met email & Instagram links']} />
     </div>
   )
 }

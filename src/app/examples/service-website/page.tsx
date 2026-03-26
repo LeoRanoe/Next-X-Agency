@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, Menu, X, Smile, Sparkles, Wrench, Shield, Baby, Building2, Star, ChevronDown, ChevronRight, CalendarDays } from 'lucide-react'
 import { toast } from 'sonner'
 import FloatingWhatsApp from '../_components/FloatingWhatsApp'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── SVG Logo ─── */
 function DentaCareLogo({ size = 36 }: { size?: number }) {
@@ -343,6 +344,7 @@ export default function DentaCarePage() {
         </div>
       </footer>
 
+      <DemoFeatures features={['Scroll-spy navigatie (useEffect + IntersectionObserver)', 'Mobiel hamburger menu', 'FAQ accordion (AnimatePresence)', 'Afsprakformulier + validatie + toast', 'Team foto profielen', 'WhatsApp integratie']} />
       <FloatingWhatsApp phone="5978001234" company="DentaCare Paramaribo" message="Hallo, ik wil graag een afspraak maken!" />
     </div>
   )

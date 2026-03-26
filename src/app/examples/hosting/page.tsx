@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import { Server, HardDrive, Globe, Shield, Activity, Upload, Download, Clock, RefreshCw, ChevronRight, CheckCircle2, AlertTriangle, Loader2, Cpu, MemoryStick, Wifi, Gauge } from 'lucide-react'
+import DemoFeatures from '../_components/DemoFeatures'
 import { toast } from 'sonner'
 
 /* ─── Logo ─── */
@@ -291,6 +292,8 @@ export default function HostingPage() {
           <p className="text-xs text-slate-500">Powered by Next‑X Agency · Server data gesimuleerd</p>
         </div>
       </footer>
+
+      <DemoFeatures features={['Resource meters (CPU/RAM/Disk/Bandbreedte)', 'Recharts grafieken (responstijd & bezoekers)', 'Services status monitor', 'Backup knop met laadstatus', 'Herstart bevestigingsdialog', 'Plan upgrade modal (3 tiers)', 'Restore per backup-rij']} />
     </div>
   )
 }

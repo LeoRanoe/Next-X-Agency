@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
 import { TrendingUp, TrendingDown, Eye, MousePointerClick, Globe, Search, ArrowUpRight, ArrowDownRight, Download, Calendar, ExternalLink, ChevronUp, ChevronDown, Target, Zap } from 'lucide-react'
 import { toast } from 'sonner'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Logo ─── */
 function SeoLogo({ size = 36 }: { size?: number }) {
@@ -262,6 +263,8 @@ export default function SeoDashboardPage() {
           <p className="text-xs text-slate-500">Powered by Next‑X Agency · Real-time data simulatie</p>
         </div>
       </footer>
+
+      <DemoFeatures features={['Recharts staafdiagram (organisch vs betaald)', 'Recharts gebiedsdiagram (positie trend)', 'Sorteerbare keyword-tabel (klik kolommen)', 'Periode filter tabs (30d / 60d / 90d)', 'Actieknopen per categorie + toast', 'Export PDF knop']} />
     </div>
   )
 }

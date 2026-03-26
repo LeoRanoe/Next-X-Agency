@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { BarChart3, ArrowRight, Smartphone, Monitor, Users, Clock, MousePointerClick, TrendingUp, CheckCircle2, XCircle, Lightbulb, Download, ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Logo ─── */
 function ShopPlazaLogo({ size = 36 }: { size?: number }) {
@@ -234,6 +235,8 @@ export default function UxUiDesignPage() {
           <p className="text-sm text-slate-500">Ontworpen door Next‑X Agency · 2025</p>
         </div>
       </footer>
+
+      <DemoFeatures features={['Voor/na slider (useRef + mousemove/touchmove)', 'Geanimeerde metrics tellers', 'Bevindingen (4 problemen + 4 oplossingen)', 'Design procesvisualisatie (4 stappen)', 'Desktop & mobiel vergelijking', 'Download UX Rapport knop + toast']} />
     </div>
   )
 }

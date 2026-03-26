@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ShoppingCart, X, Plus, Minus, Trash2, Search, Star, ChevronRight, SlidersHorizontal, Truck, Shield, Headphones, Monitor, Smartphone, Laptop, Cpu, Camera, Gamepad2, BatteryCharging, Wifi } from 'lucide-react'
 import { toast } from 'sonner'
 import FloatingWhatsApp from '../_components/FloatingWhatsApp'
+import DemoFeatures from '../_components/DemoFeatures'
 
 /* ─── Logo ─── */
 function TechMartLogo({ size = 36 }: { size?: number }) {
@@ -355,6 +356,7 @@ export default function TechMartPage() {
         </div>
       </footer>
 
+      <DemoFeatures features={['16 producten met filters & zoeken', 'Product detail modal', 'Werkende winkelwagen (useState)', 'Cart drawer (Framer Motion)', 'Mobiel filter panel', 'Deal-badges & kortingsprijzen', 'WhatsApp integratie']} />
       <FloatingWhatsApp phone="5974559876" company="TechMart SUR" message="Hallo! Ik heb een vraag over een product." />
     </div>
   )
