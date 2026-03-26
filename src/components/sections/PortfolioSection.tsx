@@ -235,7 +235,7 @@ export function PortfolioSection() {
         >
           <p className="text-slate-400 text-sm">
             Bekijk alle{' '}
-            <span className="text-white font-bold">6 projecten</span> in ons
+            <span className="text-white font-bold">projecten</span> in ons
             portfolio.
           </p>
           <Link
