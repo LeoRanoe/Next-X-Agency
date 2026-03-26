@@ -17,7 +17,7 @@ const plans = [
   {
     name: 'Starter Support',
     description: 'Foundational Structure',
-    price: '$90',
+    price: '$150',
     period: '/maand',
     tagline: 'Perfect voor kleine updates en onderhoud.',
     features: [
@@ -33,7 +33,7 @@ const plans = [
   {
     name: 'Business Support',
     description: 'Full Scale Development',
-    price: '$160',
+    price: '$280',
     period: '/maand',
     tagline: 'Ideaal voor groeiende bedrijven met actieve websites.',
     features: [
@@ -51,7 +51,7 @@ const plans = [
   {
     name: 'Partner Support',
     description: 'Enterprise Solution',
-    price: '$260',
+    price: '$480',
     period: '/maand',
     tagline: 'Voor bedrijven die een dedicated digitale partner willen.',
     features: [

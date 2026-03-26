@@ -33,17 +33,17 @@ const serviceCategories = [
     services: [
       {
         name: 'Logo Design',
-        price: 'Vanaf $20',
+        price: 'Vanaf $55',
         items: ['1 uniek logo concept', '2 gratis revisie rondes', 'PNG + JPG export (transparant & wit)', 'Alle bestandsformaten inbegrepen', 'Extra formaten op aanvraag'],
       },
       {
         name: 'Social Media Post Design',
-        price: '$4 per post',
+        price: '$10 per post',
         items: ['1 design per post', '1 revisie ronde inbegrepen', 'Instagram & Facebook formaat', '1080×1080 of 1080×1350', 'Print-ready bestand'],
       },
       {
         name: 'Flyer/Poster Design',
-        price: 'Vanaf $8',
+        price: 'Vanaf $25',
         popular: true,
         items: ['1 volledig ontwerp', '2 revisie rondes inbegrepen', 'Print-ready PDF export', 'A4 / A5 standaard formaat', 'Custom formaten mogelijk'],
       },
@@ -57,46 +57,47 @@ const serviceCategories = [
     services: [
       {
         name: 'Business Card Site',
-        price: 'Vanaf $100',
+        price: 'Vanaf $150',
         items: ['One-page gepersonaliseerd design', 'Bedrijfsinfo + WhatsApp knop', 'Contactformulier inbegrepen', 'Responsive op alle apparaten', 'SSL + online publicatie'],
       },
       {
         name: 'Service Website',
-        price: 'Vanaf $120',
+        price: 'Vanaf $250',
         popular: true,
         items: ['Multi-page (Home, Diensten, Contact)', 'Responsive design', 'Contactformulier inbegrepen', 'Over Ons pagina', 'SSL + online publicatie'],
       },
       {
         name: 'Portfolio Website',
-        price: 'Vanaf $130',
+        price: 'Vanaf $220',
         items: ['Galerij tot 20 portfolio items', 'Project detail pagina\'s', 'Over mij/ons + contact', 'Responsive design', 'SSL + publicatie'],
       },
       {
         name: 'Restaurant/Menu Site',
-        price: 'Vanaf $130',
+        price: 'Vanaf $260',
         items: ['Digitaal menu (max 50 items)', 'Openingstijden + locatie/kaart', 'Reserveringslink inbegrepen', 'Responsive design', 'SSL + publicatie'],
       },
     ],
+    note: 'Na oplevering: bug fixes, content wijzigingen en revisies worden gefactureerd tegen $15/uur. Denk aan tekst updates, afbeeldingen en kleine layout aanpassingen.',
   },
   {
     id: 'e-commerce',
     tag: 'E-Commerce',
     title: 'E-Commerce Webshops',
-    description: 'Complete webshops met winkelwagen, checkout en betalingsgateway integratie.',
+    description: 'Complete webshops met winkelwagen, checkout en bankoverschrijving integratie.',
     services: [
       {
         name: 'Starter Webshop',
-        price: 'Vanaf $280',
-        items: ['Max 25 producten', 'Winkelwagen + checkout', 'Stripe / PayPal integratie', 'Responsive design', 'Productbeheer instructies'],
+        price: 'Vanaf $350',
+        items: ['Max 25 producten', 'Winkelwagen + checkout', 'Bankoverschrijving integratie', 'Responsive design', 'Productbeheer instructies'],
       },
       {
         name: 'Grotere Webshop',
-        price: 'Vanaf $420',
+        price: 'Vanaf $550',
         popular: true,
-        items: ['Max 100 producten', 'Categorieën, filters + zoeken', 'Klantaccounts + order tracking', 'Meerdere betaalmethoden', 'Uitgebreide beheer instructies'],
+        items: ['Max 100 producten', 'Categorieën, filters + zoeken', 'Klantaccounts + order tracking', 'Bankoverschrijving + custom betaalflow', 'Uitgebreide beheer instructies'],
       },
     ],
-    note: 'Extra producten boven limiet: $2 per product (tot 250 producten). Meer dan 250 producten = custom pricing.',
+    note: 'Extra producten boven limiet: $3 per product (tot 250 producten). Meer dan 250 producten = custom pricing. Na oplevering: bug fixes & aanpassingen worden gefactureerd tegen $15/uur.',
   },
   {
     id: 'ux-ui',
@@ -106,12 +107,12 @@ const serviceCategories = [
     services: [
       {
         name: 'UX Audit & Advies',
-        price: 'Vanaf $50',
+        price: 'Vanaf $100',
         items: ['Analyse huidige website/app', 'Verbeterpunten rapport (PDF)', 'Prioriteitslijst aanbevelingen', 'Opvolgingsgesprek inbegrepen', 'Basis quickfixes advies'],
       },
       {
         name: 'UI Design (Re-design)',
-        price: 'Vanaf $90',
+        price: 'Vanaf $180',
         popular: true,
         items: ['Nieuw design (max 3 pagina\'s)', 'Figma / Adobe XD mockups', '2 revisie rondes inbegrepen', 'Handoff documentatie', 'Implementatie apart geprijsd'],
       },
@@ -125,12 +126,12 @@ const serviceCategories = [
     services: [
       {
         name: 'Basic SEO Setup',
-        price: 'Vanaf $30',
+        price: 'Vanaf $75',
         items: ['Meta tags optimalisatie', 'Sitemap aanmaken', 'Google Search Console', 'Robots.txt configuratie', 'Basis SEO rapportage'],
       },
       {
         name: 'Maandelijkse SEO Support',
-        price: '$25/maand',
+        price: '$60/maand',
         popular: true,
         items: ['Maandelijkse rapportage', 'Keyword monitoring', 'Content suggesties', 'Technische checks', 'Min. 3 maanden contract'],
       },
@@ -144,17 +145,17 @@ const serviceCategories = [
     services: [
       {
         name: 'Hosting Setup',
-        price: '$15 eenmalig',
+        price: '$35 eenmalig',
         items: ['Hosting account aanmaken', 'Domein koppeling', 'SSL installatie', 'Website deployment', 'Eenmalige installatiekosten'],
       },
       {
         name: 'Basic Hosting',
-        price: '$4/maand',
+        price: '$20/maand',
         items: ['10GB storage', '100GB bandwidth', 'SSL inbegrepen', 'Dagelijkse backups', '99.9% uptime garantie'],
       },
       {
         name: 'Business Hosting',
-        price: '$10/maand',
+        price: '$30/maand',
         popular: true,
         items: ['50GB storage', 'Onbeperkte bandwidth', 'SSL + CDN inbegrepen', 'Priority support', '99.9% uptime garantie'],
       },
@@ -169,22 +170,22 @@ const serviceCategories = [
     services: [
       {
         name: 'Starter Support',
-        price: '$90/maand',
+        price: '$150/maand',
         items: ['10 uur/maand', 'Kleine updates + bug fixes', 'Content wijzigingen', 'Technisch advies', 'Email support (48u)'],
       },
       {
         name: 'Business Support',
-        price: '$160/maand',
+        price: '$280/maand',
         popular: true,
         items: ['20 uur/maand', 'Feature development', 'Design updates + integraties', 'Strategisch advies', 'Slack support (24u)'],
       },
       {
         name: 'Partner Support',
-        price: '$260/maand',
+        price: '$480/maand',
         items: ['40 uur/maand', 'Dedicated specialist', 'Priority + complex projecten', 'Team collaboration', 'Direct contact (12u)'],
       },
     ],
-    note: 'Extra uren boven pakket limiet: $12/uur. Alle pakketten vereisen minimaal 3 maanden commitment.',
+    note: 'Extra uren boven pakket limiet: $18/uur. Alle pakketten vereisen minimaal 3 maanden commitment.',
   },
 ]
 export default function ServicesPage() {
