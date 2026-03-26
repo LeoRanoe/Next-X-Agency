@@ -5,8 +5,6 @@ import { render } from '@react-email/render'
 import { ContactNotification } from '@/emails/ContactNotification'
 import { ContactConfirmation } from '@/emails/ContactConfirmation'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 interface ContactFormData {
   name: string
   email: string
@@ -36,6 +34,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    // Initialize Resend client (only at runtime, not during build)
+    const resend = new Resend(process.env.RESEND_API_KEY)
 
     const agencyTo = process.env.CONTACT_TO_EMAIL ?? 'agencynextx@gmail.com'
     const from = process.env.RESEND_FROM_EMAIL ?? 'noreply@nextxagency.com'
