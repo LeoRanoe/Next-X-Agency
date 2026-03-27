@@ -49,7 +49,7 @@ function FooterFn() {
                 <Phone size={16} />
               </a>
               <a
-                href="mailto:lranoesendjojo@gmail.com"
+                href="mailto:agencynextx@gmail.com"
                 className="w-10 h-10 bg-slate-50 hover:bg-primary/10 border border-slate-200 hover:border-primary/30 flex items-center justify-center text-slate-400 hover:text-primary transition-all rounded-xl"
                 aria-label="Email"
               >
@@ -114,10 +114,10 @@ function FooterFn() {
               <li className="flex items-center gap-2 text-slate-500 text-sm">
                 <Mail size={16} className="text-primary shrink-0" />
                 <a
-                  href="mailto:lranoesendjojo@gmail.com"
+                  href="mailto:agencynextx@gmail.com"
                   className="hover:text-primary transition-colors"
                 >
-                  lranoesendjojo@gmail.com
+                  agencynextx@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2 text-slate-500 text-sm">
