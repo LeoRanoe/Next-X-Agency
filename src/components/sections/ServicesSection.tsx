@@ -91,9 +91,9 @@ const categories = [
     subtitle: 'Van snelle landingspagina tot volledig e-commerce platform.',
     image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=250&fit=crop&q=80',
     services: [
-      { name: 'Business Card Site', description: 'Krachtige one-page digitale identiteit. Professioneel en direct inzetbaar.', price: '$100', href: '/examples/business-card-site', recommended: false, Icon: IconBusinessCard },
-      { name: 'Service Website', description: 'Responsive multi-page platform met geavanceerde functionaliteiten.', price: '$120', href: '/examples/service-website', recommended: true, features: ["5 geoptimaliseerde pagina's", 'Lead Forms integratie', 'Basis SEO setup'], Icon: IconServiceWebsite },
-      { name: 'Starter Webshop', description: 'Max 25 producten. Winkelwagen, checkout en betaalgateway inbegrepen.', price: '$280', href: '/examples/starter-webshop', recommended: false, Icon: IconWebshop },
+      { name: 'Business Card Site', description: 'One-page digitale identiteit. Professioneel en direct inzetbaar.', price: '$150', href: '/examples/business-card-site', recommended: false, Icon: IconBusinessCard },
+      { name: 'Service Website', description: 'Responsive multi-page platform met geavanceerde functionaliteiten.', price: '$250', href: '/examples/service-website', recommended: true, features: ["Multi-page design", 'Contactformulier', 'Basis SEO setup'], Icon: IconServiceWebsite },
+      { name: 'Starter Webshop', description: 'Max 25 producten. Winkelwagen, checkout en betaalgateway inbegrepen.', price: '$350', href: '/examples/starter-webshop', recommended: false, Icon: IconWebshop },
     ],
   },
   {
@@ -103,9 +103,9 @@ const categories = [
     subtitle: 'Merkidentiteit, interface en gebruikerservaring die converteert.',
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop&q=80',
     services: [
-      { name: 'Logo & Branding', description: 'Vector-gebaseerd conceptontwerp. Scherpe merkidentiteit voor elk formaat.', price: '$20', href: '/examples/logo-branding', recommended: false, Icon: IconLogoBranding },
-      { name: 'UX/UI Design', description: 'UX audits, UI redesigns en gebruiksvriendelijke Figma mockups.', price: '$50', href: '/examples/ux-ui-design', recommended: false, Icon: IconUxUi },
-      { name: 'UX Kukru', description: 'Dedicated specialist ondersteund door ons team. Starter, Business of Partner.', price: '$90', href: '/examples/ux-kukru', recommended: false, Icon: IconUxKukru },
+      { name: 'Logo Design', description: 'Vector-gebaseerd conceptontwerp. Scherpe merkidentiteit voor elk formaat.', price: '$55', href: '/examples/logo-branding', recommended: false, Icon: IconLogoBranding },
+      { name: 'UX Audit & Advies', description: 'Analyse en verbeterpunten voor uw huidige website of platform.', price: '$100', href: '/examples/ux-ui-design', recommended: false, Icon: IconUxUi },
+      { name: 'UI Design (Re-design)', description: 'Nieuwe designs en mockups voor verbeterde gebruikerservaring.', price: '$180', href: '/examples/ux-ui-design', recommended: false, Icon: IconUxUi },
     ],
   },
   {
@@ -115,7 +115,7 @@ const categories = [
     subtitle: 'Vergroot je online bereik met SEO en zoekwoordstrategie.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&q=80',
     services: [
-      { name: 'SEO & Zichtbaarheid', description: 'Basis SEO setup, Google Search Console, sitemap en keyword monitoring.', price: '$30', href: '/examples/seo', recommended: false, features: ['Google Search Console', 'XML Sitemap setup', 'Keyword monitoring'], Icon: IconSeo },
+      { name: 'Basic SEO Setup', description: 'Meta tags, sitemap, Google Search Console en robots.txt configuratie.', price: '$75', href: '/examples/seo', recommended: false, features: ['Meta tags optimalisatie', 'Sitemap setup', 'Google Search Console'], Icon: IconSeo },
     ],
   },
 ] as const

@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
-import { Server, HardDrive, Globe, Shield, Activity, Upload, Download, Clock, RefreshCw, ChevronRight, CheckCircle2, AlertTriangle, Loader2, Cpu, MemoryStick, Wifi, Gauge } from 'lucide-react'
+import { Server, HardDrive, Globe, Shield, Activity, Upload, Download, Clock, RefreshCw, ChevronRight, CheckCircle2, AlertTriangle, Loader2, Cpu, MemoryStick, Wifi, Gauge, Bell, X, HomeIcon } from 'lucide-react'
 import DemoFeatures from '../_components/DemoFeatures'
 import { toast } from 'sonner'
 
@@ -22,19 +22,35 @@ function HostingLogo({ size = 36 }: { size?: number }) {
   )
 }
 
-const uptimeData = Array.from({ length: 24 }, (_, i) => ({
-  uur: `${i}:00`,
-  responstijd: Math.floor(45 + Math.random() * 30 + (i > 10 && i < 14 ? 20 : 0)),
-  bezoekers: Math.floor(20 + Math.random() * 80 + (i > 8 && i < 18 ? 60 : 0)),
-}))
+const uptimeData = [
+  { uur: '0:00', responstijd: 42, bezoekers: 18 }, { uur: '1:00', responstijd: 38, bezoekers: 12 },
+  { uur: '2:00', responstijd: 35, bezoekers: 8 }, { uur: '3:00', responstijd: 34, bezoekers: 5 },
+  { uur: '4:00', responstijd: 36, bezoekers: 7 }, { uur: '5:00', responstijd: 40, bezoekers: 14 },
+  { uur: '6:00', responstijd: 48, bezoekers: 32 }, { uur: '7:00', responstijd: 55, bezoekers: 58 },
+  { uur: '8:00', responstijd: 62, bezoekers: 85 }, { uur: '9:00', responstijd: 68, bezoekers: 105 },
+  { uur: '10:00', responstijd: 72, bezoekers: 118 }, { uur: '11:00', responstijd: 78, bezoekers: 132 },
+  { uur: '12:00', responstijd: 95, bezoekers: 145 }, { uur: '13:00', responstijd: 88, bezoekers: 138 },
+  { uur: '14:00', responstijd: 82, bezoekers: 125 }, { uur: '15:00', responstijd: 76, bezoekers: 110 },
+  { uur: '16:00', responstijd: 70, bezoekers: 98 }, { uur: '17:00', responstijd: 65, bezoekers: 88 },
+  { uur: '18:00', responstijd: 58, bezoekers: 72 }, { uur: '19:00', responstijd: 63, bezoekers: 82 },
+  { uur: '20:00', responstijd: 68, bezoekers: 90 }, { uur: '21:00', responstijd: 60, bezoekers: 65 },
+  { uur: '22:00', responstijd: 52, bezoekers: 42 }, { uur: '23:00', responstijd: 45, bezoekers: 25 },
+]
 
 const services = [
-  { name: 'Webserver (Nginx)', status: 'online', uptime: '99.98%', icon: Globe },
-  { name: 'Database (MySQL)', status: 'online', uptime: '99.95%', icon: HardDrive },
-  { name: 'SSL Certificaat', status: 'online', uptime: 'Geldig tot 2026', icon: Shield },
-  { name: 'Mail Server (SMTP)', status: 'online', uptime: '99.90%', icon: Activity },
-  { name: 'CDN (Cloudflare)', status: 'online', uptime: '100%', icon: Wifi },
-  { name: 'Backup Service', status: 'warning', uptime: 'Laatste: 6u geleden', icon: Upload },
+  { name: 'Webserver (Nginx)', status: 'online' as const, uptime: '99.98%', icon: Globe, detail: 'v1.24.0 · 2 workers' },
+  { name: 'Database (MySQL)', status: 'online' as const, uptime: '99.95%', icon: HardDrive, detail: '8.0.35 · 142 queries/s' },
+  { name: 'SSL Certificaat', status: 'online' as const, uptime: 'Geldig tot 2026', icon: Shield, detail: "Let's Encrypt · RSA 2048" },
+  { name: 'Mail Server (SMTP)', status: 'warning' as const, uptime: '98.2%', icon: Activity, detail: 'Queue: 12 berichten · hoge latency' },
+  { name: 'CDN (Cloudflare)', status: 'online' as const, uptime: '100%', icon: Wifi, detail: 'Edge nodes: 4 · Cache hit: 94%' },
+  { name: 'Backup Service', status: 'online' as const, uptime: 'Laatste: 3u geleden', icon: Upload, detail: 'Dagelijks om 03:00 · Retentie: 30d' },
+]
+
+const notifications = [
+  { id: 1, type: 'warning', title: 'Mail Server hoge latency', desc: 'SMTP queue loopt op. 12 berichten wachtend.', time: '14 min geleden' },
+  { id: 2, type: 'success', title: 'Automatische backup voltooid', desc: 'Dagelijkse backup succesvol · 2.4 GB', time: '3 uur geleden' },
+  { id: 3, type: 'info', title: 'SSL certificaat vernieuwd', desc: "Let's Encrypt certificaat automatisch vernieuwd.", time: '2 dagen geleden' },
+  { id: 4, type: 'success', title: 'Beveiligingsupdate geïnstalleerd', desc: 'PHP 8.3.14 patch succesvol geïnstalleerd.', time: '3 dagen geleden' },
 ]
 
 const plans = [
@@ -52,16 +68,33 @@ const backups = [
 ]
 
 export default function HostingPage() {
+  const [isLoading, setIsLoading] = useState(true)
   const [backupLoading, setBackupLoading] = useState(false)
+  const [backupStage, setBackupStage] = useState('')
   const [showUpgrade, setShowUpgrade] = useState(false)
   const [confirmRestart, setConfirmRestart] = useState(false)
+  const [notifOpen, setNotifOpen] = useState(false)
+  const [readNotifs, setReadNotifs] = useState<number[]>([])
+  const [activeNav, setActiveNav] = useState('dashboard')
+  const unreadCount = notifications.filter(n => !readNotifs.includes(n.id)).length
+
+  useEffect(() => { const t = setTimeout(() => setIsLoading(false), 1200); return () => clearTimeout(t) }, [])
 
   const handleBackup = () => {
     setBackupLoading(true)
-    setTimeout(() => {
-      setBackupLoading(false)
-      toast.success('Backup succesvol aangemaakt!', { description: 'Nieuwste backup: nu · 2.4 GB' })
-    }, 2500)
+    const stages = ['Verbinding maken...', 'Bestanden scannen...', 'Comprimeren...', 'Uploaden...', 'Verifiëren...']
+    let i = 0
+    setBackupStage(stages[0])
+    const interval = setInterval(() => {
+      i++
+      if (i < stages.length) { setBackupStage(stages[i]) }
+      else {
+        clearInterval(interval)
+        setBackupLoading(false)
+        setBackupStage('')
+        toast.success('Backup succesvol aangemaakt!', { description: 'Nieuwste backup: nu · 2.4 GB' })
+      }
+    }, 800)
   }
 
   const handleRestart = () => {
@@ -75,7 +108,7 @@ export default function HostingPage() {
   const bandwidthUsage = 27
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 pb-16 md:pb-0">
       {/* ═══ HEADER ═══ */}
       <header className="sticky top-10 z-20 bg-slate-900 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
@@ -90,12 +123,57 @@ export default function HostingPage() {
             <span className="flex items-center gap-1.5 px-2.5 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Alle systemen online
             </span>
+            {/* Notification bell */}
+            <div className="relative">
+              <button onClick={() => { setNotifOpen(!notifOpen); setReadNotifs(notifications.map(n => n.id)) }} className="relative p-2 rounded-lg hover:bg-slate-800 transition-colors" aria-label="Notificaties">
+                <Bell className="w-4 h-4" />
+                {unreadCount > 0 && <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">{unreadCount}</span>}
+              </button>
+              <AnimatePresence>
+                {notifOpen && (
+                  <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                    className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden z-50">
+                    <div className="p-3 border-b border-slate-100 flex justify-between items-center">
+                      <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'var(--font-heading)' }}>Notificaties</span>
+                      <button onClick={() => setNotifOpen(false)} className="text-slate-400 hover:text-slate-600"><X className="w-4 h-4" /></button>
+                    </div>
+                    <div className="max-h-72 overflow-y-auto">
+                      {notifications.map(n => (
+                        <div key={n.id} className="px-3 py-2.5 border-b border-slate-50 hover:bg-slate-50/50">
+                          <div className="flex items-start gap-2">
+                            <span className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${n.type === 'warning' ? 'bg-amber-400' : n.type === 'success' ? 'bg-green-400' : 'bg-sky-400'}`} />
+                            <div>
+                              <p className="text-xs font-bold text-slate-900">{n.title}</p>
+                              <p className="text-[11px] text-slate-500">{n.desc}</p>
+                              <p className="text-[10px] text-slate-400 mt-0.5">{n.time}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <button onClick={() => setShowUpgrade(true)} className="px-3 py-1.5 bg-sky-500 text-white text-xs font-bold rounded-lg hover:bg-sky-600 transition-colors hidden sm:block">
               Upgrade Plan
             </button>
           </div>
         </div>
       </header>
+
+      {/* ═══ LOADING SKELETON ═══ */}
+      {isLoading ? (
+        <div className="max-w-7xl mx-auto px-4 py-6 space-y-6 animate-pulse">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {[1,2,3,4].map(i => <div key={i} className="bg-white rounded-xl h-24 border border-slate-200" />)}
+          </div>
+          <div className="grid lg:grid-cols-2 gap-4">
+            {[1,2].map(i => <div key={i} className="bg-white rounded-xl h-64 border border-slate-200" />)}
+          </div>
+          <div className="bg-white rounded-xl h-48 border border-slate-200" />
+        </div>
+      ) : (
 
       <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
         {/* ═══ RESOURCE METERS ═══ */}
@@ -166,10 +244,13 @@ export default function HostingPage() {
               {services.map(s => (
                 <div key={s.name} className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50/50 transition-colors">
                   <s.icon className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm font-medium text-slate-900 flex-1">{s.name}</span>
-                  <span className="text-xs text-slate-500">{s.uptime}</span>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sm font-medium text-slate-900 block">{s.name}</span>
+                    <span className="text-[11px] text-slate-400">{s.detail}</span>
+                  </div>
+                  <span className="text-xs text-slate-500 hidden sm:block">{s.uptime}</span>
                   <span className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${s.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${s.status === 'online' ? 'bg-green-500' : 'bg-yellow-500'}`} />
+                    <span className={`w-1.5 h-1.5 rounded-full ${s.status === 'online' ? 'bg-green-500' : 'bg-yellow-500 animate-pulse'}`} />
                     {s.status === 'online' ? 'Online' : 'Aandacht'}
                   </span>
                 </div>
@@ -182,13 +263,18 @@ export default function HostingPage() {
               className="w-full bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md transition-shadow text-left disabled:opacity-70">
               <div className="flex items-center gap-3">
                 {backupLoading ? <Loader2 className="w-5 h-5 text-sky-500 animate-spin" /> : <Upload className="w-5 h-5 text-sky-500" />}
-                <div>
+                <div className="flex-1">
                   <p className="font-bold text-sm text-slate-900" style={{ fontFamily: 'var(--font-heading)' }}>
-                    {backupLoading ? 'Backup maken...' : 'Maak backup'}
+                    {backupLoading ? 'Backup bezig...' : 'Maak backup'}
                   </p>
-                  <p className="text-xs text-slate-500">Handmatige server backup starten</p>
+                  <p className="text-xs text-slate-500">{backupStage || 'Handmatige server backup starten'}</p>
                 </div>
               </div>
+              {backupLoading && (
+                <div className="mt-3 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <motion.div className="h-full bg-sky-500 rounded-full" initial={{ width: '5%' }} animate={{ width: '90%' }} transition={{ duration: 4, ease: 'linear' }} />
+                </div>
+              )}
             </button>
             <button onClick={() => setConfirmRestart(true)}
               className="w-full bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md transition-shadow text-left">
@@ -232,6 +318,7 @@ export default function HostingPage() {
           </div>
         </div>
       </div>
+      )} {/* end loading skeleton conditional */}
 
       {/* ═══ CONFIRM RESTART ═══ */}
       <AnimatePresence>
@@ -286,14 +373,57 @@ export default function HostingPage() {
       </AnimatePresence>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="bg-slate-900 py-6">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2"><HostingLogo size={20} /><span className="text-xs font-bold text-white">Hosting Control Panel — Demo</span></div>
-          <p className="text-xs text-slate-500">Powered by Next‑X Agency · Server data gesimuleerd</p>
+      <footer className="bg-slate-900 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-3"><HostingLogo size={24} /><span className="font-bold text-white text-sm" style={{ fontFamily: 'var(--font-heading)' }}>Hosting Panel</span></div>
+              <p className="text-xs text-slate-400 leading-relaxed">Professionele hosting voor Surinaamse bedrijven. Snelle servers, betrouwbare uptime, lokale support.</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-white text-xs mb-3" style={{ fontFamily: 'var(--font-heading)' }}>Diensten</h4>
+              <div className="space-y-1.5 text-xs text-slate-400">
+                <p>Webhosting</p><p>VPS Hosting</p><p>Domeinregistratie</p><p>SSL Certificaten</p><p>E-mail Hosting</p>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-bold text-white text-xs mb-3" style={{ fontFamily: 'var(--font-heading)' }}>Support</h4>
+              <div className="space-y-1.5 text-xs text-slate-400">
+                <p>Kennisbank</p><p>Ticket systeem</p><p>Status pagina</p><p>API Documentatie</p>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-bold text-white text-xs mb-3" style={{ fontFamily: 'var(--font-heading)' }}>Contact</h4>
+              <div className="space-y-1.5 text-xs text-slate-400">
+                <p>Henck Arronstraat 64</p><p>Paramaribo, Suriname</p><p>support@mijnbedrijf.sr</p><p>+597 456-789</p>
+                <p className="pt-1 text-slate-500">KvK: 56789012</p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-slate-800 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p className="text-[11px] text-slate-500">© 2025 Hosting Panel · Paramaribo, Suriname</p>
+            <p className="text-[11px] text-slate-500">Powered by Next‑X Agency · Server data gesimuleerd</p>
+          </div>
         </div>
       </footer>
 
-      <DemoFeatures features={['Resource meters (CPU/RAM/Disk/Bandbreedte)', 'Recharts grafieken (responstijd & bezoekers)', 'Services status monitor', 'Backup knop met laadstatus', 'Herstart bevestigingsdialog', 'Plan upgrade modal (3 tiers)', 'Restore per backup-rij']} />
+      {/* ═══ MOBILE BOTTOM NAV ═══ */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-t border-slate-800 z-40 flex justify-around py-2">
+        {[
+          { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
+          { id: 'services', label: 'Services', icon: Server },
+          { id: 'backups', label: 'Backups', icon: Upload },
+          { id: 'plan', label: 'Plan', icon: Gauge },
+        ].map(n => (
+          <button key={n.id} onClick={() => { setActiveNav(n.id); if (n.id === 'plan') setShowUpgrade(true) }}
+            className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg transition-colors ${activeNav === n.id ? 'text-sky-400' : 'text-slate-500'}`}>
+            <n.icon className="w-5 h-5" />
+            <span className="text-[10px] font-bold">{n.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      <DemoFeatures features={['Loading skeleton bij eerste weergave', 'Realtime notificatie dropdown (Bell icon)', 'Recharts met realistisch dagverloop', 'Resource meters met animatie', 'Service status met detail info', 'Progressieve backup met stages', 'Herstart bevestigingsdialog', 'Plan upgrade modal met feature vergelijking', 'Uitgebreide footer met KvK', 'Mobile bottom navigation']} />
     </div>
   )
 }

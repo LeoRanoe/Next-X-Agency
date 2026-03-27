@@ -42,7 +42,6 @@ const plans = [
       'Design updates & integraties',
       'Strategisch advies',
       'Slack support (24u response)',
-      'Analytics dashboard',
     ],
     highlighted: true,
     badge: 'MEEST GEKOZEN',
@@ -202,7 +201,7 @@ function PricingSectionFn() {
           viewport={{ once: true }}
           className="text-center text-sm text-slate-500 mt-12"
         >
-          Extra uren: <strong className="text-slate-900">$12/uur</strong> | Minimaal{' '}
+          Extra uren: <strong className="text-slate-900">$18/uur</strong> | Minimaal{' '}
           <strong className="text-slate-900">3 maanden</strong> commitment vereist.
         </motion.p>
       </div>

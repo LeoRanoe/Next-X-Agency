@@ -21,12 +21,6 @@ const contactItems = [
   { icon: Clock, label: 'Reactietijd', value: 'Binnen 24-48 uur', href: null, isExternal: false },
 ] as const
 
-const trustItems = [
-  { value: '48u', label: 'Reactietijd' },
-  { value: '100%', label: 'Op maat' },
-  { value: '6+', label: 'Projecten' },
-]
-
 export default function ContactPage() {
   return (
     <>
@@ -76,32 +70,10 @@ export default function ContactPage() {
               <span className="text-primary">samenwerken</span>
             </motion.h1>
 
-            <motion.p variants={fadeInUp} className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed mb-10">
+            <motion.p variants={fadeInUp} className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
               Beschrijf uw project en wij sturen binnen 24-48 uur een
               vrijblijvende quote. Of stuur direct een WhatsApp bericht.
             </motion.p>
-
-            {/* Trust bar */}
-            <motion.div
-              variants={fadeInUp}
-              className="inline-flex flex-wrap items-center justify-center gap-0 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden"
-            >
-              {trustItems.map((item, i) => (
-                <div
-                  key={item.value}
-                  className={`text-center px-6 py-4 ${
-                    i < trustItems.length - 1 ? 'border-r border-slate-200' : ''
-                  }`}
-                >
-                  <p className="text-xl font-bold text-primary" style={{ fontFamily: 'var(--font-heading)' }}>
-                    {item.value}
-                  </p>
-                  <p className="text-[10px] text-slate-400 font-semibold tracking-[0.15em] uppercase mt-0.5">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
         </section>
 
@@ -147,7 +119,7 @@ export default function ContactPage() {
                 className="lg:sticky lg:top-28"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shrink-0">
                     <Phone size={17} className="text-white" />
                   </div>
                   <h2
@@ -158,8 +130,8 @@ export default function ContactPage() {
                   </h2>
                 </div>
 
-                {/* Dark contact card */}
-                <div className="rounded-3xl overflow-hidden mb-4" style={{ background: '#0a0f1e' }}>
+                {/* Light contact card */}
+                <div className="rounded-3xl overflow-hidden mb-4 bg-white border border-slate-100">
                   {/* Top orange edge */}
                   <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
@@ -176,25 +148,25 @@ export default function ContactPage() {
                           <a
                             href={href}
                             {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                            className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-300 group"
+                            className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-primary/5 hover:border-primary/30 transition-all duration-300 group"
                           >
-                            <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/25 transition-colors duration-300">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
                               <Icon size={18} className="text-primary" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] mb-0.5">{label}</p>
-                              <p className="text-white font-semibold text-sm group-hover:text-primary transition-colors truncate">{value}</p>
+                              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-0.5">{label}</p>
+                              <p className="text-slate-900 font-semibold text-sm group-hover:text-primary transition-colors truncate">{value}</p>
                             </div>
-                            <ArrowRight size={14} className="text-slate-600 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300 ml-auto shrink-0" />
+                            <ArrowRight size={14} className="text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300 ml-auto shrink-0" />
                           </a>
                         ) : (
-                          <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.04] border border-white/[0.06]">
-                            <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
+                          <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                               <Icon size={18} className="text-primary" />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] mb-0.5">{label}</p>
-                              <p className="text-white font-semibold text-sm">{value}</p>
+                              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-0.5">{label}</p>
+                              <p className="text-slate-900 font-semibold text-sm">{value}</p>
                             </div>
                           </div>
                         )}
